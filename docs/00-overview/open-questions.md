@@ -24,7 +24,7 @@
 
 | # | What | Needed by | Until then |
 |---|---|---|---|
-| Q13 | **Web3Forms access key** — free at web3forms.com, created with the email that should receive messages (adytisingh@gmail.com). Add as `VITE_WEB3FORMS_KEY` in `.env` and in Vercel. | Phase 9 (deploy) | Contact page shows an "Email Aditi" button instead of the form |
+| Q13 | ~~Web3Forms access key~~ — **done**: created and set in Vercel (type Config) and local `.env`. | — | — |
 
 Owner can fill later: AWS program start month (`src/data/experience.ts`), GfG certificate date (`src/data/certificates.ts`).
 

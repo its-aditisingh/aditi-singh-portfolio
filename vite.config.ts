@@ -4,8 +4,8 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Placeholder until the real Vercel URL is known — set VITE_SITE_URL in .env / Vercel (Phase 9)
-const DEFAULT_SITE_URL = 'https://aditisingh.vercel.app';
+// Live Vercel URL; VITE_SITE_URL (set in Vercel) overrides it
+const DEFAULT_SITE_URL = 'https://its-aditisingh-portfolio.vercel.app';
 
 const PAGES = ['/', '/about', '/projects', '/certificates', '/achievements', '/experience', '/contact'];
 const COLLECTIONS = ['projects', 'certificates', 'achievements', 'experience'] as const;

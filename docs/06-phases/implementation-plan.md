@@ -151,12 +151,15 @@ Notes:
 - Per-page share previews only work for crawlers that run JS; link-preview bots see the site-wide card. Prerendering would fix that (v2).
 - Test infra: `renderRoute` is async (waits for lazy routes), Testing Library async timeout 3 s, Vitest test timeout 10 s; `IntersectionObserver`/`ResizeObserver` mocked in jsdom. 83 tests.
 
-## Phase 9 — Deploy
-- [ ] Push to GitHub (new repo, e.g. `its-aditisingh/portfolio`)
-- [ ] Vercel project, env vars, SPA rewrite
-- [ ] Free `*.vercel.app` subdomain (e.g. `aditisingh.vercel.app`); set `VITE_SITE_URL` to it
-- [ ] Final content review **with Aditi**
-- [ ] Add portfolio link to resume, LinkedIn, GitHub profile
+## Phase 9 — Deploy ✅ live (29 Oct 2026) — **https://its-aditisingh-portfolio.vercel.app**
+- [x] Pushed to GitHub: https://github.com/its-aditisingh/aditi-singh-portfolio (`main`)
+- [x] Vercel project (auto-detected Vite), SPA rewrite works (direct deep links return 200 and render as pages)
+- [x] Env vars `VITE_WEB3FORMS_KEY` and `VITE_SITE_URL` — must be type **Config**, not Secret: Vercel blocks `VITE_*` secrets because Vite inlines them into the browser bundle (the Web3Forms key is public by design). A saved Secret can't be switched to Config — delete and re-add. Redeploy after any change.
+- [x] Verified live: share card, canonical and sitemap (33 URLs) use the real domain; Web3Forms key is in the Contact chunk and the form shows; 3D mounts on desktop; no broken images; phone number not in the JS
+- [ ] Send one real test message from the live Contact form and confirm it reaches adytisingh@gmail.com
+- [ ] Check scores on PageSpeed Insights (Google's servers — this laptop's Lighthouse swings ±10). Local Lighthouse on the live site: `/` 79, `/certificates` 85, A11y/BP/SEO 100
+- [ ] Final content review **with Aditi** (✎ items in `05-content/`)
+- [ ] Add the portfolio link to resume, LinkedIn, GitHub profile
 
 ## Rough effort
 | Phase | Estimate |

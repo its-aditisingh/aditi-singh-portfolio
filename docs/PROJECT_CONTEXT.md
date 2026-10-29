@@ -40,8 +40,8 @@ Warm off-white background, white rounded cards, **orange accent**, monospace ind
 - Home shows **both** identities: static "MCA · AI/ML & Data Science" + rotating roles (Assistant Professor ↔ AI/ML).
 - Formal studio portrait (`photo2.jpeg`) in an arch frame with the 3D network behind it.
 - Phone **never** shown in full (masked `+91 738 •••• 858` only if ever enabled; off by default).
-- Hosting on free `*.vercel.app`.
+- Hosting on free Vercel: `its-aditisingh-portfolio.vercel.app`.
 - Content marked ✎ in `05-content/` was added during planning — the owner may edit or remove it.
 
 ## Status
-✅ Phases 0–8 done (setup · design system & layout · data & assets · Home & About · collections + detail views · contact — live send pending the Web3Forms key · 3D hero · animations · SEO/a11y/perf — Lighthouse mobile 90 / 88 / 84, see plan) → next: [Phase 9 – Deploy](06-phases/implementation-plan.md). Remaining minor questions: [open-questions.md](00-overview/open-questions.md).
+✅ **Live:** https://its-aditisingh-portfolio.vercel.app · code: https://github.com/its-aditisingh/aditi-singh-portfolio. Phases 0–9 done; remaining: one real contact-form test, PageSpeed Insights check, content review with Aditi ([plan](06-phases/implementation-plan.md)).
