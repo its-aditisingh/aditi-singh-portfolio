@@ -1,0 +1,35 @@
+# original personal documents (resume with phone no., raw scans, registration slips)
+# — the site uses processed copies in public/ and src/assets/ instead
+Certificate/
+
+# deps & build
+node_modules
+dist
+dist-ssr
+coverage
+*.tsbuildinfo
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+
+# vercel
+.vercel
+
+# downloaded source images (project screenshots from GitHub) — WebP outputs are committed
+assets-src/
+
+# local unminified build used for CPU profiling
+dist-prof/

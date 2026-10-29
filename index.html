@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FBF7F3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F0D0C" media="(prefers-color-scheme: dark)" />
+    <meta name="author" content="Aditi Singh" />
+    <title>Aditi Singh — AI/ML &amp; Data Science | Aspiring Assistant Professor</title>
+    <!--
+      Site-wide share card. Link previews (WhatsApp, LinkedIn, X) don't run JavaScript, so these
+      must be in the static HTML. data-rh lets react-helmet-async replace them per page for
+      crawlers that do run JS. %SITE_URL% is filled in at build (vite.config.ts).
+    -->
+    <meta
+      data-rh="true"
+      name="description"
+      content="Portfolio of Aditi Singh, MCA (95%) in AI/ML & Data Science from AKS University. AI/ML intern at Shanti Infosoft. Projects, certifications, achievements and experience."
+    />
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:site_name" content="Aditi Singh" />
+    <meta
+      data-rh="true"
+      property="og:title"
+      content="Aditi Singh — AI/ML & Data Science | Aspiring Assistant Professor"
+    />
+    <meta
+      data-rh="true"
+      property="og:description"
+      content="MCA (95%) in AI/ML & Data Science · AI/ML intern at a CMMI Level 5 company · National GOER 2025 finalist. Projects, certificates and experience."
+    />
+    <meta data-rh="true" property="og:url" content="%SITE_URL%/" />
+    <meta data-rh="true" property="og:image" content="%SITE_URL%/og-image.png" />
+    <meta data-rh="true" property="og:image:width" content="1200" />
+    <meta data-rh="true" property="og:image:height" content="630" />
+    <meta data-rh="true" property="og:image:alt" content="Aditi Singh — MCA · AI/ML & Data Science" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <link data-rh="true" rel="canonical" href="%SITE_URL%/" />
+    <!-- Apply saved/system theme before first paint (no flash). Keep in sync with src/lib/theme.ts -->
+    <script>
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          stored === 'dark' ||
+          (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <p style="padding: 16px; font-family: system-ui, sans-serif">
+        This portfolio needs JavaScript. Contact Aditi Singh at adytisingh@gmail.com.
+      </p>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

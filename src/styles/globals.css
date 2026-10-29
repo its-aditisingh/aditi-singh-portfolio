@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tokens: docs/04-design/design-system.md — stored as RGB triplets for Tailwind opacity modifiers */
+@layer base {
+  :root {
+    --bg: 251 247 243;
+    --bg-glow: 255 233 221;
+    --surface: 255 255 255;
+    --surface-2: 245 239 234;
+    --line: 237 229 223;
+    --ink: 22 19 15;
+    --muted: 110 101 94;
+    --accent: 234 90 36;
+    --accent-ink: 184 65 15;
+    --accent-soft: 253 231 220;
+    --accent-btn: 201 68 16;
+    --on-accent: 255 255 255;
+    --success: 31 157 85;
+    --danger: 214 69 69;
+
+    --nav-h: 64px;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: 15 13 12;
+    --bg-glow: 42 22 13;
+    --surface: 26 23 22;
+    --surface-2: 35 31 29;
+    --line: 46 40 37;
+    --ink: 246 241 236;
+    --muted: 166 156 148;
+    --accent: 255 122 69;
+    --accent-ink: 255 154 110;
+    --accent-soft: 58 30 18;
+    --accent-btn: 255 122 69;
+    --on-accent: 15 13 12;
+    --success: 60 203 127;
+    --danger: 255 107 107;
+
+    color-scheme: dark;
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --nav-h: 72px;
+    }
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 17px;
+    }
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.22);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-4 md:px-6;
+  }
+
+  /* Warm glow top-right + faint dot grid (design-system §8) */
+  .page-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(60rem 40rem at 100% -10%, rgb(var(--bg-glow)) 0%, transparent 60%),
+      radial-gradient(rgb(var(--ink) / 0.045) 1px, transparent 1px);
+    background-size:
+      auto,
+      22px 22px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
