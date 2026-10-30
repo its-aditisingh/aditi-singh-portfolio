@@ -7,15 +7,18 @@
 | Q1 | Headline role on Home | **Both.** Static headline "MCA · AI/ML & Data Science" + rotating roles (Aspiring Assistant Professor → AI/ML Engineer → Data Scientist → Power BI Analyst). Editable later in `src/data/profile.ts`. |
 | Q2 | Profile photo | Superseded by Q2b → `photo2.jpeg`. See [profile.md](../05-content/profile.md#photo). |
 | Q3 | Phone public? | **Hidden by default** (`showPhone: false`). If ever enabled, show masked: `+91 738 •••• 858` (middle 4 digits hidden) — never the full number. |
-| Q4 | More projects | Use what exists. Added a 4th entry for the **internship work** (described only from resume bullets). More projects later. |
+| Q4 | More projects | 31 Oct: the generic internship entry was replaced by the GitHub ML repos (Cancer Variant Prioritization, Tesla Stock Price Prediction). |
 | Q7 | Currently Learning | AI/ML + Neural Networks confirmed; planner added related topics (marked ✎ in [education-and-skills.md](../05-content/education-and-skills.md#currently-learning)) — remove any that don't fit. |
 | Q8 | Event photos | **Provided:** 4 WhatsApp images, all from National GOER 2025 (Third Edition). Used in the GOER achievement gallery. |
 | Q9 | Domain | Free **`*.vercel.app`** (e.g. `aditisingh.vercel.app`, or nearest available). |
 | — | Extra content | Planner may add related content; owner edits later. Everything added this way is marked ✎ in `05-content/`. |
 | Q2b | Formal headshot | **Provided:** `Certificate/photo2.jpeg` (studio portrait, plain background) is the portfolio photo. `photo.jpeg` is not used. |
-| Q5 | Mind Scan Analyzer stack | **Follow GitHub** (README + repo About). No metrics. |
-| Q6 | AWS program start | **Left empty**; owner fills later. |
+| Q5 | Mind Scan Analyzer stack | **Follow GitHub** (README + repo About). |
+| Q6 | AWS program dates | **Feb 2025 – May 2025** (owner, 31 Oct, revision 2). |
 | Q10 | GfG completion date | **Left empty**; owner fills later. |
+| Q14 | Cancer variant dataset source | **Kaggle** — punithpunk/cancer-variant-dataset-for-machine-learning (verified identical file). |
+| Q18 | Reading notes | **3 papers** from PDFs Aditi supplied (revision 2). |
+| Q19 | Mind Scan accuracy | **98.41% kept** — owner: real results, proven in the viva. |
 | Q12 | Resume PDF contains the full phone number | **Use the resume as-is** (owner OK with phone inside the PDF). Copied to `public/resume/Aditi-Singh-Resume.pdf`. The site's own pages still never show the phone (Q3). |
 
 | Q11 | Internship length on Home | Default kept: **"5+ months"** (true for both resume and certificate dates). Change in `src/data/highlights.ts`. |
@@ -25,8 +28,12 @@
 | # | What | Needed by | Until then |
 |---|---|---|---|
 | Q13 | ~~Web3Forms access key~~ — **done**: created and set in Vercel (type Config) and local `.env`. | — | — |
+| Q15 | **Exact Kaggle link for `tsla.csv`** — owner says Kaggle; values are Yahoo Finance prices but no Kaggle file matched exactly | — | Source "Downloaded from Kaggle", GitHub CSV linked |
+| Q16 | Confirm the **EEG Power BI dashboard** uses the same BRMH dataset as Mind Scan (counts match exactly) | — | Shown as BRMH |
+| Q17 | Mind Scan repo still ships `model.json` labelled "demo model trained on synthetic EEG-shaped data" (60 trees) while the portfolio reports the owner-confirmed 98.41% (300 trees) | Before applications | Suggest re-exporting the real model to the repo |
+| Q20 | Aditi to **review the methodology PDF** before using it in applications | — | Published as drafted |
 
-Owner can fill later: AWS program start month (`src/data/experience.ts`), GfG certificate date (`src/data/certificates.ts`).
+Owner can fill later: GfG certificate date (`src/data/certificates.ts`).
 
 ## Suggestions
 

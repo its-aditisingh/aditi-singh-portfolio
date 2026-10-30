@@ -1,4 +1,4 @@
-import { ArrowRight, Github, Globe, Lock } from 'lucide-react';
+import { ArrowRight, Database, Github, Globe, Lock } from 'lucide-react';
 import { TiltCard } from '@/components/animations/TiltCard';
 import { DetailLink } from '@/components/detail/DetailLink';
 import { Badge } from '@/components/ui/Badge';
@@ -61,6 +61,13 @@ export function ProjectCard({ project, index, wide = false }: ProjectCardProps) 
             {project.title}
           </h2>
           <p className="mt-1 text-sm text-muted">{project.tagline}</p>
+          <p className="mt-3 flex items-start gap-1.5 text-xs text-muted">
+            <Database aria-hidden className="mt-0.5 size-3.5 shrink-0 text-accent" />
+            <span>
+              <span className="font-semibold text-ink/80">Dataset:</span>{' '}
+              {project.dataset.name}
+            </span>
+          </p>
           {wide && (
             <p className="mt-4 hidden text-[15px] text-ink/80 lg:block">{project.summary}</p>
           )}

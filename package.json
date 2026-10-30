@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "images": "node scripts/generate-images.mjs"
+    "images": "node scripts/generate-images.mjs",
+    "research:pdf": "node scripts/build-research-pdf.mjs"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "5.1.0",

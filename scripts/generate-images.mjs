@@ -38,7 +38,7 @@ const W = {
  */
 const jobs = [
   // ---- Certificates (docs/05-content/certificates.md)
-  cert('saylor-cs207-fundamentals-of-ml', '1911370930AS.pdf', { page: 2 }),
+  cert('saylor-cs207-fundamentals-of-ml', 'saylor-Fundamentals of Machine Learning.pdf', { page: 2 }),
   cert('isro-iirs-tropical-cyclone-workshop', 'ISRO IIRS Certificate.pdf'),
   cert('kaggle-feature-engineering', 'kagle-feature engineering.jpeg'),
   cert('kaggle-time-series', 'kagle-time series.jpeg'),
@@ -76,6 +76,15 @@ const jobs = [
   photo('goer-2025-strategy-1', 'WhatsApp Image 2026-10-29 at 12.25.19 AM.jpeg'),
   photo('goer-2025-strategy-2', 'WhatsApp Image 2026-10-29 at 12.25.20 AM.jpeg'),
   photo('goer-2025-venue', 'WhatsApp Image 2026-10-29 at 12.25.20 AM (1).jpeg'),
+
+  // ---- Anchoring / speaking photos (docs/05-content/achievements.md)
+  photo('anchor-mca-tcs-stage', 'mca-anchor3.jpeg'),
+  photo('anchor-mca-tcs-hall', 'mca-anchor4.jpeg'),
+  photo('anchor-mca-podium', 'mca-anchor5.jpeg'),
+  // 1832×4096 phone shot — crop to her at the lectern
+  { ...photo('anchor-mca-lectern', 'mca-anchor2.jpeg'), extract: { left: 0, top: 900, width: 1832, height: 2300 } },
+  photo('anchor-mca-group', 'mca-anchor1.jpeg'),
+  photo('anchor-bca-stage', 'bca-anchor.jpeg'),
 
   // ---- Project screenshots from the GitHub repos (docs/05-content/projects.md)
   shot('mind-scan-home', 'mind-scan/MindScan-Analyzer-Homepage.png'),
@@ -207,7 +216,7 @@ async function ogImage() {
     <text x="80" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="26" fill="#6E655E" letter-spacing="3">PORTFOLIO</text>
     <text x="80" y="290" font-family="Segoe UI, Arial, sans-serif" font-size="84" font-weight="800" fill="#16130F">Aditi Singh</text>
     <text x="80" y="350" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="600" fill="#B8410F">MCA · AI/ML &amp; Data Science</text>
-    <text x="80" y="410" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#6E655E">Aspiring Assistant Professor · AI/ML Engineer</text>
+    <text x="80" y="410" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#6E655E">Aspiring Assistant Professor · Computer Science</text>
     <rect x="80" y="470" width="96" height="6" rx="3" fill="#EA5A24"/>
   </svg>`;
 
@@ -218,6 +227,13 @@ async function ogImage() {
 }
 
 async function main() {
+  // Check every source first: a missing file must not leave the outputs half-deleted
+  const sources = new Set([...jobs.map((job) => job.src), `${CERT}/photo2.jpeg`]);
+  const missing = [...sources].filter((src) => !existsSync(join(ROOT, src)));
+  if (missing.length) {
+    throw new Error(`Missing source files (nothing was changed):\n  ${missing.join('\n  ')}`);
+  }
+
   // Start clean so renamed/removed jobs don't leave stale files behind
   for (const dir of ['certificates', 'profile', 'achievements', 'projects']) {
     await rm(join(ROOT, ASSETS, dir), { recursive: true, force: true });

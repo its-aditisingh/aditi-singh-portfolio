@@ -5,7 +5,8 @@ import type { Profile } from '@/types';
 export const profile: Profile = {
   name: 'Aditi Singh',
   headline: 'MCA · AI/ML & Data Science',
-  roles: ['Aspiring Assistant Professor', 'AI/ML Engineer', 'Data Scientist', 'Power BI Analyst'],
+  // Owner (31 Oct): purely focused on the Assistant Professor role — one role, no rotation
+  roles: ['Aspiring Assistant Professor'],
   objectiveShort:
     'MCA postgraduate specialising in Artificial Intelligence, Machine Learning and Data Science, with hands-on industry experience from an AI/ML internship at a CMMI Level 5 company. I aim to teach Computer Science the way industry practises it — and keep building AI that matters.',
   objectiveLong:
@@ -16,7 +17,7 @@ export const profile: Profile = {
   phoneMasked: '+91 738 •••• 858',
   photo: image('profile/aditi-portrait', 'Portrait of Aditi Singh in a white shirt and glasses'),
   avatar: image('profile/aditi-avatar', 'Aditi Singh'),
-  availability: 'Open to Assistant Professor & AI/ML roles',
+  availability: 'Open to Assistant Professor roles in Computer Science',
   openTo: [
     'Assistant Professor roles — Computer Science / AI & ML / Data Science',
     'AI/ML and Data Science roles',

@@ -2,12 +2,11 @@ import { ArrowRight } from 'lucide-react';
 import { DetailLink } from '@/components/detail/DetailLink';
 import { Badge } from '@/components/ui/Badge';
 import { Chip } from '@/components/ui/Chip';
-import { formatDuration, formatRange, monthsBetween } from '@/lib/format';
+import { durationLabel, formatRange } from '@/lib/format';
 import type { Experience } from '@/types';
 
 export function ExperienceCard({ item }: { item: Experience }) {
-  const duration =
-    item.start && item.end ? formatDuration(monthsBetween(item.start, item.end)) : null;
+  const duration = durationLabel(item.start, item.end);
 
   return (
     <DetailLink

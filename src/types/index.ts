@@ -115,6 +115,17 @@ export interface Metric {
   label: string;
 }
 
+/** Where a project's data comes from — required on every project (owner request, 31 Oct). */
+export interface ProjectDataset {
+  name: string;
+  /** Size and what's in it. */
+  description: string;
+  /** Who collected / published it, or that the origin isn't documented. */
+  source: string;
+  citation?: string;
+  links: LinkRef[];
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -129,7 +140,7 @@ export interface Project {
   solution: string;
   features: string[];
   pipeline?: string[];
-  dataset?: string;
+  dataset: ProjectDataset;
   techStack: { label: string; items: string[] }[];
   screenshots: CaptionedImage[];
   /** Hotspots on the cover image, in % of width/height. */
@@ -217,6 +228,31 @@ export interface Experience {
   compare?: CompareBlock;
   related?: InternalLink;
   proof?: Proof;
+}
+
+/* ---------- Research ---------- */
+/** A write-up by Aditi (PDF), e.g. a project methodology note. */
+export interface WorkingPaper {
+  slug: string;
+  title: string;
+  kind: string; // "Methodology note"
+  date: ISODate;
+  pages: number;
+  abstract: string;
+  topics: string[];
+  fileUrl: string;
+  relatedProject?: string; // project slug
+}
+
+/** Aditi's own summary of a paper she read. Content comes only from her. */
+export interface PaperNote {
+  title: string;
+  authors: string;
+  venue: string;
+  year: number;
+  url?: string;
+  summary: string;
+  takeaways: string[];
 }
 
 /* ---------- Home ---------- */

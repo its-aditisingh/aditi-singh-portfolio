@@ -9,7 +9,7 @@ Covers FR-C1 … FR-C5, FR-C10, FR-C11. Content: [05-content/experience.md](../0
    │   Shanti Infosoft LLP, Indore · CMMI L5
    │   one-line summary · 4 skill chips          [View details →]
    │
-   ●── Mar 2025 ───────────────────────────────────────────────
+   ●── May 2025 ───────────────────────────────────────────────
    │   Advanced Program on Amazon Web Services      [Training]
    │   Anudip Foundation (supported by Accenture) · 332 hrs · A1
    │

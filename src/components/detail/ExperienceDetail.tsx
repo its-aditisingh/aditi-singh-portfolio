@@ -9,7 +9,7 @@ import { CopyButton } from '@/components/ui/CopyButton';
 import { ZoomableImage } from '@/components/ui/ZoomableImage';
 import { experience } from '@/data/experience';
 import { neighbours } from '@/lib/collections';
-import { formatDuration, formatRange, monthsBetween } from '@/lib/format';
+import { durationLabel, formatRange } from '@/lib/format';
 import { DetailSection } from './DetailSection';
 import { DetailShell } from './DetailShell';
 import { DetailTitle } from './DetailTitle';
@@ -22,8 +22,7 @@ export function ExperienceDetail() {
   if (!item) return <NotFoundDetail basePath="/experience" collection="Experience" />;
 
   const { prev, next } = neighbours(experience, slug);
-  const duration =
-    item.start && item.end ? formatDuration(monthsBetween(item.start, item.end)) : null;
+  const duration = durationLabel(item.start, item.end);
 
   return (
     <DetailShell

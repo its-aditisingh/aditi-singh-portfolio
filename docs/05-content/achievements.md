@@ -1,4 +1,4 @@
-# Content: Achievements (6)
+# Content: Achievements (2)
 
 Source: resume + GOER certificate + other certificates. → `src/data/achievements.ts`
 
@@ -33,61 +33,12 @@ Captions describe the scene only; they don't name individuals in the photos.
 
 ---
 
-## 02 · MCA with 95%  `slug: mca-95-percent`
-| Field | Value |
-|---|---|
-| Organisation | AKS University, Satna |
-| Date | 2026 |
-| Category | Academic |
-| Icon | `GraduationCap` |
-| Metric | `95%` |
-| Summary | Completed MCA (AI/ML & Data Science) with 95%. |
-| Story | Consistent academic performance across the MCA programme (2024–2026), alongside the Mind Scan Analyzer final-year project and an industry internship. |
-| Skills | AI, Machine Learning, Data Science |
-| Proof | — (links to About › Education) |
+## Removed (31 Oct 2026)
+MCA 95%, BCA 94.8%, Saylor 96% and AWS Grade A1 were removed — grades are shown only in About › Education and on the certificates (owner request). A data test fails if an achievement metric contains a % or grade.
 
 ---
 
-## 03 · BCA with 94.8%  `slug: bca-94-8-percent`
-| Field | Value |
-|---|---|
-| Organisation | Makhanlal Chaturvedi National University, Bhopal |
-| Date | 2024 |
-| Category | Academic |
-| Icon | `Award` |
-| Metric | `94.8%` |
-| Summary | Completed BCA with 94.8%. |
-| Proof | — (links to About › Education) |
-
----
-
-## 04 · 96% in Saylor CS207 Fundamentals of Machine Learning  `slug: saylor-ml-96-percent`
-| Field | Value |
-|---|---|
-| Organisation | Saylor University (IACET Accredited Provider) |
-| Date | 2026-10-22 |
-| Category | Academic |
-| Icon | `Medal` |
-| Metric | `96.00%` |
-| Summary | Scored 96% in an IACET-accredited, 19-hour machine learning course. |
-| Proof | Links to certificate `saylor-cs207-fundamentals-of-ml` |
-
----
-
-## 05 · Grade A1 — 332-hour AWS Program (Certificate of Merit)  `slug: aws-program-grade-a1`
-| Field | Value |
-|---|---|
-| Organisation | Anudip Foundation, supported by Accenture |
-| Date | 2025-03 |
-| Category | Academic |
-| Icon | `Cloud` |
-| Metric | `332 hrs · A1` |
-| Summary | Awarded a Certificate of Merit with Grade A1 for completing 332 hours of AWS training. |
-| Proof | Links to certificate `anudip-aws-advanced-program` |
-
----
-
-## 06 · Anchor, Speaker & Peer Mentor  `slug: anchor-speaker-mentor`
+## 02 · Anchor, Speaker & Peer Mentor  `slug: anchor-speaker-mentor`
 | Field | Value |
 |---|---|
 | Organisation | AKS University, Satna |
@@ -97,3 +48,15 @@ Captions describe the scene only; they don't name individuals in the photos.
 | Story | • Anchored university-level events and technical programs. • Delivered technical seminars and project presentations on AI/ML topics. • Assisted peers in understanding programming and machine learning concepts. • Active participant in academic and student engagement activities. |
 | Skills | Public Speaking, Mentoring, Communication, Event Management |
 | Proof | — (no photos yet; add later if available) |
+
+### Anchor photos (added 31 Oct 2026, from `Certificate/`)
+| Output | Source | Caption |
+|---|---|---|
+| `anchor-mca-podium` (**cover**) | mca-anchor5.jpeg | Addressing the audience at AKS University |
+| `anchor-mca-tcs-stage` | mca-anchor3.jpeg | Anchoring the TCS Internship Program — September 2025 |
+| `anchor-mca-tcs-hall` | mca-anchor4.jpeg | TCS Internship Program, Central Hall (A-Block) |
+| `anchor-mca-lectern` | mca-anchor2.jpeg (cropped) | Compering an MCA department event |
+| `anchor-mca-group` | mca-anchor1.jpeg | MCA students with faculty after a department event |
+| `anchor-bca-stage` | bca-anchor.jpeg | Anchoring a stage programme during BCA |
+
+Event facts in the story come from the event screen in mca-anchor3/4: "TCS – Internship Program", Department of Computer Science, organised by final-year MCA students, in association with MPOnline Limited, September 2025, Central Hall (A-Block).

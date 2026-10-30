@@ -9,7 +9,7 @@ describe('Projects (docs/03-features/03-projects.md)', () => {
     const links = screen
       .getAllByRole('link')
       .filter((link) => link.getAttribute('href')?.startsWith('/projects/'));
-    expect(links).toHaveLength(4);
+    expect(links).toHaveLength(5);
   });
 
   it('opens a project as a modal over the list and closes it with Escape', async () => {
@@ -33,7 +33,7 @@ describe('Projects (docs/03-features/03-projects.md)', () => {
 
     fireEvent.click(within(dialog).getByRole('link', { name: /^Next/ }));
     expect(
-      await screen.findByRole('dialog', { name: 'EEG Analysis Dashboard' }),
+      await screen.findByRole('dialog', { name: 'Cancer Variant Prioritization (ML)' }),
     ).toBeInTheDocument();
 
     esc();
@@ -52,15 +52,25 @@ describe('Projects (docs/03-features/03-projects.md)', () => {
     );
     expect(screen.getByRole('link', { name: /live demo/i })).toHaveAttribute('target', '_blank');
     expect(screen.getByText('98.41%')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Dataset & source' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /paper \(doi\)/i })).toHaveAttribute(
+      'href',
+      'https://doi.org/10.3389/fpsyt.2021.707581',
+    );
     expect(screen.getByRole('slider', { name: /compare/i })).toBeInTheDocument();
   });
 
-  it('shows the confidentiality note for the internship project', async () => {
-    await renderRoute('/projects/shanti-infosoft-ml-internship-work');
-    expect(screen.getByText('Details of client work are confidential.')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /see the internship/i })).toHaveAttribute(
+  it('shows the GitHub ML projects with their dataset', async () => {
+    await renderRoute('/projects/tesla-stock-price-prediction');
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Tesla Stock Price Prediction' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Tesla \(TSLA\) daily stock prices/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /csv on github/i })).toHaveAttribute(
       'href',
-      '/experience/shanti-infosoft-ai-ml-intern',
+      'https://github.com/its-aditisingh/tesla-stock-price-prediction/blob/main/tsla.csv',
     );
   });
 
@@ -156,12 +166,12 @@ describe('Certificates (docs/03-features/04-certificates.md)', () => {
 });
 
 describe('Achievements (docs/03-features/05-achievements.md)', () => {
-  it('lists all six with GOER as the hero tile', async () => {
+  it('lists GOER and anchoring, with no grade repeats', async () => {
     await renderRoute('/achievements');
     const links = screen
       .getAllByRole('link')
       .filter((link) => link.getAttribute('href')?.startsWith('/achievements/'));
-    expect(links).toHaveLength(6);
+    expect(links).toHaveLength(2);
     expect(links[0]).toHaveAttribute('href', '/achievements/goer-2025-national-finalist');
   });
 
@@ -207,7 +217,7 @@ describe('Experience (docs/03-features/06-experience.md)', () => {
 
   it('omits sections with no data', async () => {
     await renderRoute('/experience/anudip-aws-training');
-    expect(screen.getByText('Mar 2025')).toBeInTheDocument();
+    expect(screen.getByText(/Feb 2025 – May 2025/)).toHaveTextContent('Feb 2025 – May 2025 · 3 months');
     expect(screen.queryByRole('heading', { name: 'What I did' })).not.toBeInTheDocument();
   });
 });

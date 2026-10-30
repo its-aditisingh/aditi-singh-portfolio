@@ -1,15 +1,15 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, FolderGit2, Lightbulb } from 'lucide-react';
 import { HighlightPings } from '@/components/animations/HighlightPings';
 import { Magnetic } from '@/components/animations/Magnetic';
 import { RevealText } from '@/components/animations/RevealText';
-import { WordRotator } from '@/components/animations/WordRotator';
 import { SocialLinks } from '@/components/layout/SocialLinks';
 import { HeroCanvas } from '@/components/three/HeroCanvas';
 import { Button } from '@/components/ui/Button';
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { profile } from '@/data/profile';
+import { researchInterests } from '@/data/skills';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { ease, fadeUp, staggerParent } from '@/lib/motion';
 
@@ -54,7 +54,7 @@ export function Hero() {
           variants={fadeUp}
           className="mt-5 text-xl font-bold tracking-[-0.01em] text-accent-ink md:text-2xl"
         >
-          <WordRotator words={profile.roles} />
+          {profile.roles[0]}
         </motion.p>
         <motion.p
           variants={fadeUp}
@@ -67,12 +67,36 @@ export function Hero() {
           {profile.objectiveShort}
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-3">
+        {/* Research interests sit right above the actions (owner request, 31 Oct) */}
+        <motion.div variants={fadeUp} className="mt-7">
+          <h2
+            id="hero-research"
+            className="flex items-center gap-1.5 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-muted"
+          >
+            <Lightbulb aria-hidden strokeWidth={1.75} className="size-4 text-accent" />
+            Research interests
+          </h2>
+          <ul aria-labelledby="hero-research" className="mt-2.5 flex max-w-xl flex-wrap gap-1.5">
+            {researchInterests.map((interest) => (
+              <li
+                key={interest}
+                className="rounded-full border border-accent/25 bg-accent-soft px-3 py-1 text-[13px] font-medium text-accent-ink"
+              >
+                {interest}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="mt-6 flex flex-wrap items-center gap-3">
           <Magnetic>
             <Button to="/contact" icon={ArrowRight}>
               Get In Touch
             </Button>
           </Magnetic>
+          <Button to="/projects" variant="secondary" icon={FolderGit2} iconPosition="start">
+            Projects
+          </Button>
           <Button
             href={profile.resumeUrl}
             download
@@ -80,7 +104,7 @@ export function Hero() {
             icon={Download}
             iconPosition="start"
           >
-            Download Resume
+            Resume
           </Button>
         </motion.div>
 

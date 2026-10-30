@@ -1,7 +1,47 @@
 import { captioned, image } from '@/lib/images';
-import type { Project } from '@/types';
+import type { Project, ProjectDataset } from '@/types';
 
-// Source: docs/05-content/projects.md — screenshots and metrics come from each GitHub repo
+// Source: docs/05-content/projects.md — every fact comes from the project's GitHub repo
+// (README, code, committed screenshots). Every project must name its dataset (owner request).
+
+const BRMH_DATASET: ProjectDataset = {
+  name: 'BRMH resting-state EEG dataset ("EEG Psychiatric Disorders Dataset")',
+  description:
+    '945 subjects — 850 patients across six major psychiatric disorder groups and 95 healthy controls. 1,149 columns: demographics (sex, age, education, IQ) plus quantitative EEG features (absolute band power and inter-channel coherence across frequency bands).',
+  source:
+    'Collected and published by Park et al. (2021); a public copy is hosted on Kaggle.',
+  citation:
+    'Park, S. M., Jeong, B., Oh, D. Y., et al. (2021). Identification of Major Psychiatric Disorders From Resting-State Electroencephalography Using a Machine Learning Approach. Frontiers in Psychiatry, 12, 707581.',
+  links: [
+    { label: 'Paper (DOI)', href: 'https://doi.org/10.3389/fpsyt.2021.707581', kind: 'other' },
+    {
+      label: 'Dataset on Kaggle',
+      href: 'https://www.kaggle.com/datasets/shashwatwork/eeg-psychiatric-disorders-dataset',
+      kind: 'other',
+    },
+  ],
+};
+
+const CANCER_VARIANT_DATASET: ProjectDataset = {
+  name: 'Cancer variant prioritization dataset (cancer_variant_prioritization_dataset.csv)',
+  description:
+    '10,000 genetic variants × 9 columns: chromosome, position, gene, variant type, population allele frequency, CADD score, SIFT, PolyPhen and the clinical-significance label (pathogenic, likely pathogenic, VUS, benign).',
+  source:
+    'Kaggle — "Cancer Variant Dataset for Machine Learning" by Punith Punk (CC0: Public Domain). The publisher describes it as a synthetic dataset of cancer genomic variants for machine-learning research.',
+  links: [
+    {
+      label: 'Dataset on Kaggle',
+      href: 'https://www.kaggle.com/datasets/punithpunk/cancer-variant-dataset-for-machine-learning',
+      kind: 'other',
+    },
+    {
+      label: 'CSV on GitHub',
+      href: 'https://github.com/its-aditisingh/cancer-variant-prioritization-ml/blob/main/cancer_variant_prioritization_dataset.csv',
+      kind: 'other',
+    },
+  ],
+};
+
 export const projects: Project[] = [
   {
     slug: 'mind-scan-analyzer',
@@ -16,29 +56,28 @@ export const projects: Project[] = [
       'NeuroScan home screen: "EEG signals, decoded by AI" with Try the Classifier and View Performance buttons',
     ),
     summary:
-      'An AI-powered platform that classifies resting-state EEG features into seven mental-disorder categories with a Random Forest model — running entirely in the browser, with dashboards for performance, insights and the dataset.',
+      'An AI-powered web platform that classifies resting-state EEG features into seven diagnostic groups (six psychiatric disorder categories and healthy controls) with a Random Forest model — prediction runs entirely in the browser, with views for model performance, feature insights and the dataset.',
     problem: 'EEG data is hard to interpret without specialised tools or expertise.',
     solution:
-      'Upload an EEG feature CSV (BRMH schema) and get per-row disorder predictions instantly. The trained model is exported to the web app, so inference runs locally in the browser, while performance, feature-importance and dataset views explain what the model does.',
+      'A Python training pipeline cleans the BRMH data, selects 10 informative features with an ANOVA F-test and trains a 300-tree Random Forest. The model is exported to JSON and re-implemented in TypeScript, so a visitor can upload an EEG feature CSV and get predictions locally, without a server.',
     features: [
       'Upload & Predict — CSV drop-zone, sample data and data preview',
-      'Seven-class mental-disorder classification',
+      'Seven-class diagnostic classification',
       'Model performance — accuracy, F1, confusion matrix, per-class report',
-      'Model insights — top-10 feature importance',
+      'Model insights — feature importance',
       'Dataset explorer — class distribution and feature schema',
-      'Runs locally in the browser',
+      'Runs locally in the browser (Random Forest re-implemented in TypeScript)',
       'Light and dark mode',
     ],
     pipeline: [
-      'Raw EEG Data',
-      'Data Cleaning',
-      'Feature Engineering',
-      'Model Processing',
-      'Prediction',
-      'Visualization & Reporting',
+      'BRMH EEG features',
+      'Impute & encode',
+      'Standardise',
+      'Select 10 features (ANOVA F)',
+      'Random Forest (300 trees)',
+      'In-browser prediction',
     ],
-    dataset:
-      'BRMH (Bukhyun Research Mental Health) resting-state EEG — 945 patients, 1,149 EEG features, 7 disorder classes',
+    dataset: BRMH_DATASET,
     techStack: [
       { label: 'Frontend', items: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui'] },
       {
@@ -66,18 +105,18 @@ export const projects: Project[] = [
       ),
       captioned(
         'projects/mind-scan-performance',
-        'Model performance screen: 98.41% accuracy, macro F1 0.98, confusion matrix and classification report',
+        'Model performance screen with accuracy, F1 scores, confusion matrix and classification report',
         'Model performance — 98.41% accuracy on held-out data',
       ),
       captioned(
         'projects/mind-scan-insights',
-        'Bar chart of the top 10 most important EEG features by mean Gini decrease',
+        'Bar chart of the top 10 features by importance',
         'Model insights — top-10 feature importance',
       ),
       captioned(
         'projects/mind-scan-dataset',
         'Dataset screen: 945 patients, 1,149 EEG features, 7 disorder classes, BRMH source, class distribution chart',
-        'Dataset — BRMH, 945 patients, 7 classes',
+        'Dataset — BRMH, 945 subjects, 7 groups',
       ),
       captioned(
         'projects/mind-scan-workflow',
@@ -94,7 +133,10 @@ export const projects: Project[] = [
     ],
     beforeAfter: {
       before: image('projects/mind-scan-dataset', 'Dataset overview of the BRMH EEG data'),
-      after: image('projects/mind-scan-performance', 'Model performance results'),
+      after: image(
+        'projects/mind-scan-performance',
+        'Model performance screen with accuracy, F1 scores and confusion matrix',
+      ),
       beforeLabel: 'Raw dataset',
       afterLabel: 'Model results',
     },
@@ -107,16 +149,15 @@ export const projects: Project[] = [
     results: [
       'Evaluated on a 20% stratified test split (random_state = 42).',
       'Weighted F1 of 0.98 across the seven classes.',
-      'Presented during the MCA final-year evaluation.',
+      'Presented and demonstrated during the MCA final-year evaluation (viva).',
     ],
     futureScope: [
+      'Stratified k-fold cross-validation and an external test set',
       'Real-time EEG monitoring',
       'More advanced ML models',
       'User authentication & profiles',
-      'Cloud deployment',
       'Wearable EEG integration',
       'Exportable PDF reports',
-      'Advanced analytics dashboard',
       'Mobile app',
     ],
     links: [
@@ -128,6 +169,127 @@ export const projects: Project[] = [
       },
     ],
     featured: true,
+  },
+  {
+    slug: 'cancer-variant-prioritization-ml',
+    title: 'Cancer Variant Prioritization (ML)',
+    tagline: 'Predicting the clinical significance of cancer-associated genetic variants',
+    category: 'AI / ML',
+    context: 'Machine learning · Bioinformatics',
+    summary:
+      'A supervised machine-learning workflow that classifies 10,000 cancer-associated genetic variants by clinical significance with a Random Forest, from preprocessing and encoding to evaluation and feature-importance analysis.',
+    problem:
+      'Genetic variant data mixes numeric scores (allele frequency, CADD) with categorical annotations (gene, variant type, SIFT, PolyPhen), which makes manual prioritisation slow.',
+    solution:
+      'A Scikit-learn pipeline imputes missing values (mean / mode), scales numeric features, one-hot encodes categorical ones, and trains a Random Forest on an 80:20 split; the fitted pipeline is saved for reuse.',
+    features: [
+      'Mean / mode imputation for numeric and categorical features',
+      'StandardScaler + OneHotEncoder in a ColumnTransformer',
+      'Random Forest classifier (200 trees, max depth 10)',
+      'Accuracy, confusion matrix, precision, recall and F1',
+      'Feature-importance analysis',
+      'Serialized preprocessing + model pipeline (Pickle)',
+    ],
+    pipeline: [
+      'Load 10K variants',
+      'Impute (mean / mode)',
+      'Scale + one-hot encode',
+      '80:20 split',
+      'Random Forest',
+      'Evaluate + importance',
+    ],
+    dataset: CANCER_VARIANT_DATASET,
+    techStack: [
+      { label: 'AI / Data', items: ['Python', 'Scikit-learn', 'Pandas', 'NumPy'] },
+      { label: 'Tools', items: ['Jupyter Notebook', 'Pickle', 'Git', 'GitHub'] },
+    ],
+    screenshots: [],
+    results: [
+      'The notebook computes accuracy and per-class precision, recall and F1; following the repository’s own guidance, figures will be reported here once verified.',
+      'Educational / research project — predictions must not be used for clinical decisions.',
+    ],
+    futureScope: [
+      'Cross-validation and hyperparameter tuning',
+      'Class-imbalance analysis and baseline comparison',
+      'ROC-AUC / precision-recall analysis',
+      'Validation on an independent, well-documented dataset',
+      'Interactive interface for exploring predictions',
+    ],
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/its-aditisingh/cancer-variant-prioritization-ml',
+        kind: 'github',
+      },
+    ],
+    featured: false,
+  },
+  {
+    slug: 'tesla-stock-price-prediction',
+    title: 'Tesla Stock Price Prediction',
+    tagline: 'Linear Regression on 15 years of daily TSLA prices — and a lesson in data leakage',
+    category: 'AI / ML',
+    context: 'Machine learning · Financial time series',
+    summary:
+      'A supervised regression project that estimates Tesla’s daily closing price from historical market data and engineered date and lag features, with a chronological train-test split.',
+    problem:
+      'How far can simple historical-price features go in predicting a stock’s closing price — and how do we avoid fooling ourselves when evaluating it?',
+    solution:
+      'Cleans the data, engineers date parts, the previous close and a 5-day moving average, splits chronologically (80:20, no shuffling), scales features and fits a Linear Regression evaluated with MSE, RMSE and R².',
+    features: [
+      'Missing-value handling and date parsing',
+      'Date features (year, month, day) and previous-close lag feature',
+      '5-day rolling-mean feature',
+      'Chronological 80:20 split (no shuffling)',
+      'StandardScaler + Linear Regression',
+      'MSE, RMSE and R² evaluation',
+    ],
+    pipeline: [
+      'Load 3,948 days',
+      'Clean + parse dates',
+      'Date & lag features',
+      'Chronological split',
+      'Scale + Linear Regression',
+      'MSE / RMSE / R²',
+    ],
+    dataset: {
+      name: 'Tesla (TSLA) daily stock prices (tsla.csv)',
+      description:
+        '3,948 trading days from 29 June 2010 to 10 March 2026, with date, open, high, low, close and volume.',
+      source:
+        'Downloaded from Kaggle. The values are Yahoo Finance daily prices (split-adjusted).',
+      links: [
+        {
+          label: 'CSV on GitHub',
+          href: 'https://github.com/its-aditisingh/tesla-stock-price-prediction/blob/main/tsla.csv',
+          kind: 'other',
+        },
+      ],
+    },
+    techStack: [
+      { label: 'AI / Data', items: ['Python', 'Scikit-learn', 'Pandas', 'NumPy'] },
+      { label: 'Tools', items: ['Jupyter Notebook', 'Pickle', 'Git', 'GitHub'] },
+    ],
+    screenshots: [],
+    results: [
+      'The notebook reports R² = 0.9986 (RMSE 3.50), but this is not a valid estimate: the 5-day moving-average feature includes the same day’s closing price — the value being predicted. This leakage is documented in the repository.',
+      'Next step: build features from past values only and compare against a naive “yesterday’s close” baseline.',
+      'Educational project — not financial advice.',
+    ],
+    futureScope: [
+      'Leakage-free rolling features',
+      'Time-series baselines (naive, ARIMA)',
+      'Additional technical indicators',
+      'Error analysis across market periods',
+    ],
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/its-aditisingh/tesla-stock-price-prediction',
+        kind: 'github',
+      },
+    ],
+    featured: false,
   },
   {
     slug: 'eeg-analysis-dashboard',
@@ -152,6 +314,7 @@ export const projects: Project[] = [
       'Gender, age-range and disorder filters',
     ],
     pipeline: ['EEG Dataset', 'Power Query', 'Data Model', 'DAX Measures', 'Interactive Report'],
+    dataset: BRMH_DATASET,
     techStack: [
       {
         label: 'Tools',
@@ -221,6 +384,7 @@ export const projects: Project[] = [
       'Gene, chromosome and clinical-significance filters',
     ],
     pipeline: ['Variant Dataset', 'Power Query', 'Data Model', 'DAX Measures', 'Insights Report'],
+    dataset: CANCER_VARIANT_DATASET,
     techStack: [
       {
         label: 'Tools',
@@ -272,41 +436,6 @@ export const projects: Project[] = [
         kind: 'github',
       },
     ],
-    featured: false,
-  },
-  {
-    slug: 'shanti-infosoft-ml-internship-work',
-    title: 'Predictive Analytics & ML Models',
-    tagline: 'Industry machine-learning work at a CMMI Level 5 company',
-    category: 'AI / ML',
-    context: 'AI/ML Internship · Shanti Infosoft LLP, Indore',
-    period: 'Jan 2026 – Jun 2026',
-    summary:
-      'Python-based machine learning models and predictive analytics developed during an industry-immersion internship, from data preparation to decision-ready reports.',
-    problem:
-      'Raw business data has to become reliable predictions and clear reports before it can support decisions.',
-    solution:
-      'Preprocessed data, engineered features, built and evaluated Scikit-Learn models, and turned the results into visualizations and analytical reports.',
-    features: [
-      'Data preprocessing',
-      'Feature engineering',
-      'Model development',
-      'Model evaluation',
-      'Visual analytics & reporting',
-    ],
-    pipeline: [
-      'Raw Data',
-      'Preprocessing',
-      'Feature Engineering',
-      'Model Training',
-      'Evaluation',
-      'Reports & Visuals',
-    ],
-    techStack: [{ label: 'AI / Data', items: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy'] }],
-    screenshots: [],
-    links: [],
-    relatedExperience: 'shanti-infosoft-ai-ml-intern',
-    confidentialNote: 'Details of client work are confidential.',
     featured: false,
   },
 ];

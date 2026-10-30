@@ -39,7 +39,7 @@ export function ContactPage() {
           <div className="lg:col-start-1 lg:row-start-1">
             <SectionHeading
               as="h1"
-              index={7}
+              index={8}
               eyebrow="Contact"
               title="Let's talk."
               description="Open to Assistant Professor roles, AI/ML & data opportunities and collaborations."

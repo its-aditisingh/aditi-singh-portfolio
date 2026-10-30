@@ -33,8 +33,8 @@ Source: resume + internship certificate + Anudip certificate. → `src/data/expe
 | Organisation | Anudip Foundation for Social Welfare — Skill and Career Development Center, Indore (supported by Accenture) |
 | Type | Training |
 | Location | Indore, Madhya Pradesh |
-| Start | *(empty — owner will add)* |
-| End | 2025-03 *(certificate text reads "from March 2025 to March 2025")* · display "March 2025" until start is added |
+| Start | 2025-02 *(owner, 31 Oct 2026)* |
+| End | 2025-05 *(owner; the certificate text reads "from March 2025 to March 2025")* · display "Feb 2025 – May 2025 · 3 months" |
 | Summary | Completed 332 hours of structured training on Amazon Web Services and received a Certificate of Merit with Grade A1. |
 | Responsibilities | *(Not stated on certificate — show only summary + facts unless Aditi adds details: e.g. services covered, labs.)* |
 | Skills | AWS, Cloud Computing |

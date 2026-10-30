@@ -7,9 +7,10 @@ import { bentoItem, inViewOnce, staggerParent } from '@/lib/motion';
 
 const descriptions: Record<string, string> = {
   '/about': 'Education, skills & what I’m learning',
+  '/research': 'Interests, write-ups & paper notes',
   '/projects': 'AI/ML and data analytics work',
   '/certificates': 'Kaggle, Saylor, ISRO-IIRS & more',
-  '/achievements': 'GOER 2025 finalist & academics',
+  '/achievements': 'GOER 2025 finalist & anchoring',
   '/experience': 'Industry internship & training',
   '/contact': 'Let’s work together',
 };

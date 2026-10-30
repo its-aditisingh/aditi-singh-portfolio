@@ -58,40 +58,52 @@ import img20w800 from '@/assets/achievements/goer-2025-strategy-2-800.webp';
 import img20w1280 from '@/assets/achievements/goer-2025-strategy-2-1280.webp';
 import img21w800 from '@/assets/achievements/goer-2025-venue-800.webp';
 import img21w1200 from '@/assets/achievements/goer-2025-venue-1200.webp';
-import img22w800 from '@/assets/projects/mind-scan-home-800.webp';
-import img22w1600 from '@/assets/projects/mind-scan-home-1600.webp';
-import img23w800 from '@/assets/projects/mind-scan-upload-800.webp';
-import img23w1600 from '@/assets/projects/mind-scan-upload-1600.webp';
-import img24w800 from '@/assets/projects/mind-scan-run-prediction-800.webp';
-import img24w1600 from '@/assets/projects/mind-scan-run-prediction-1600.webp';
-import img25w800 from '@/assets/projects/mind-scan-performance-800.webp';
-import img25w1600 from '@/assets/projects/mind-scan-performance-1600.webp';
-import img26w800 from '@/assets/projects/mind-scan-insights-800.webp';
-import img26w1600 from '@/assets/projects/mind-scan-insights-1600.webp';
-import img27w800 from '@/assets/projects/mind-scan-dataset-800.webp';
-import img27w1600 from '@/assets/projects/mind-scan-dataset-1600.webp';
-import img28w600 from '@/assets/projects/mind-scan-workflow-600.webp';
-import img28w1024 from '@/assets/projects/mind-scan-workflow-1024.webp';
-import img29w800 from '@/assets/projects/eeg-patient-overview-800.webp';
-import img29w1322 from '@/assets/projects/eeg-patient-overview-1322.webp';
-import img30w800 from '@/assets/projects/eeg-demographic-overview-800.webp';
-import img30w1322 from '@/assets/projects/eeg-demographic-overview-1322.webp';
-import img31w800 from '@/assets/projects/eeg-disorder-analysis-800.webp';
-import img31w1320 from '@/assets/projects/eeg-disorder-analysis-1320.webp';
-import img32w800 from '@/assets/projects/eeg-signal-analysis-800.webp';
-import img32w1313 from '@/assets/projects/eeg-signal-analysis-1313.webp';
-import img33w800 from '@/assets/projects/cancer-executive-overview-800.webp';
-import img33w1315 from '@/assets/projects/cancer-executive-overview-1315.webp';
-import img34w800 from '@/assets/projects/cancer-clinical-significance-800.webp';
-import img34w1316 from '@/assets/projects/cancer-clinical-significance-1316.webp';
-import img35w800 from '@/assets/projects/cancer-gene-chromosome-800.webp';
-import img35w1314 from '@/assets/projects/cancer-gene-chromosome-1314.webp';
-import img36w800 from '@/assets/projects/cancer-variant-risk-800.webp';
-import img36w1315 from '@/assets/projects/cancer-variant-risk-1315.webp';
-import img37w800 from '@/assets/projects/cancer-predictive-evidence-800.webp';
-import img37w1315 from '@/assets/projects/cancer-predictive-evidence-1315.webp';
-import img38w800 from '@/assets/projects/cancer-research-discovery-800.webp';
-import img38w1318 from '@/assets/projects/cancer-research-discovery-1318.webp';
+import img22w800 from '@/assets/achievements/anchor-mca-tcs-stage-800.webp';
+import img22w1600 from '@/assets/achievements/anchor-mca-tcs-stage-1600.webp';
+import img23w800 from '@/assets/achievements/anchor-mca-tcs-hall-800.webp';
+import img23w1534 from '@/assets/achievements/anchor-mca-tcs-hall-1534.webp';
+import img24w800 from '@/assets/achievements/anchor-mca-podium-800.webp';
+import img24w1600 from '@/assets/achievements/anchor-mca-podium-1600.webp';
+import img25w800 from '@/assets/achievements/anchor-mca-lectern-800.webp';
+import img25w1600 from '@/assets/achievements/anchor-mca-lectern-1600.webp';
+import img26w800 from '@/assets/achievements/anchor-mca-group-800.webp';
+import img26w1600 from '@/assets/achievements/anchor-mca-group-1600.webp';
+import img27w800 from '@/assets/achievements/anchor-bca-stage-800.webp';
+import img27w1066 from '@/assets/achievements/anchor-bca-stage-1066.webp';
+import img28w800 from '@/assets/projects/mind-scan-home-800.webp';
+import img28w1600 from '@/assets/projects/mind-scan-home-1600.webp';
+import img29w800 from '@/assets/projects/mind-scan-upload-800.webp';
+import img29w1600 from '@/assets/projects/mind-scan-upload-1600.webp';
+import img30w800 from '@/assets/projects/mind-scan-run-prediction-800.webp';
+import img30w1600 from '@/assets/projects/mind-scan-run-prediction-1600.webp';
+import img31w800 from '@/assets/projects/mind-scan-performance-800.webp';
+import img31w1600 from '@/assets/projects/mind-scan-performance-1600.webp';
+import img32w800 from '@/assets/projects/mind-scan-insights-800.webp';
+import img32w1600 from '@/assets/projects/mind-scan-insights-1600.webp';
+import img33w800 from '@/assets/projects/mind-scan-dataset-800.webp';
+import img33w1600 from '@/assets/projects/mind-scan-dataset-1600.webp';
+import img34w600 from '@/assets/projects/mind-scan-workflow-600.webp';
+import img34w1024 from '@/assets/projects/mind-scan-workflow-1024.webp';
+import img35w800 from '@/assets/projects/eeg-patient-overview-800.webp';
+import img35w1322 from '@/assets/projects/eeg-patient-overview-1322.webp';
+import img36w800 from '@/assets/projects/eeg-demographic-overview-800.webp';
+import img36w1322 from '@/assets/projects/eeg-demographic-overview-1322.webp';
+import img37w800 from '@/assets/projects/eeg-disorder-analysis-800.webp';
+import img37w1320 from '@/assets/projects/eeg-disorder-analysis-1320.webp';
+import img38w800 from '@/assets/projects/eeg-signal-analysis-800.webp';
+import img38w1313 from '@/assets/projects/eeg-signal-analysis-1313.webp';
+import img39w800 from '@/assets/projects/cancer-executive-overview-800.webp';
+import img39w1315 from '@/assets/projects/cancer-executive-overview-1315.webp';
+import img40w800 from '@/assets/projects/cancer-clinical-significance-800.webp';
+import img40w1316 from '@/assets/projects/cancer-clinical-significance-1316.webp';
+import img41w800 from '@/assets/projects/cancer-gene-chromosome-800.webp';
+import img41w1314 from '@/assets/projects/cancer-gene-chromosome-1314.webp';
+import img42w800 from '@/assets/projects/cancer-variant-risk-800.webp';
+import img42w1315 from '@/assets/projects/cancer-variant-risk-1315.webp';
+import img43w800 from '@/assets/projects/cancer-predictive-evidence-800.webp';
+import img43w1315 from '@/assets/projects/cancer-predictive-evidence-1315.webp';
+import img44w800 from '@/assets/projects/cancer-research-discovery-800.webp';
+import img44w1318 from '@/assets/projects/cancer-research-discovery-1318.webp';
 
 export const images = {
   'certificates/saylor-cs207-fundamentals-of-ml': { src: img0w1600, srcSet: `${img0w400} 400w, ${img0w800} 800w, ${img0w1600} 1600w`, width: 1600, height: 1238 },
@@ -116,23 +128,29 @@ export const images = {
   'achievements/goer-2025-strategy-1': { src: img19w1280, srcSet: `${img19w800} 800w, ${img19w1280} 1280w`, width: 1280, height: 853 },
   'achievements/goer-2025-strategy-2': { src: img20w1280, srcSet: `${img20w800} 800w, ${img20w1280} 1280w`, width: 1280, height: 853 },
   'achievements/goer-2025-venue': { src: img21w1200, srcSet: `${img21w800} 800w, ${img21w1200} 1200w`, width: 1200, height: 1600 },
-  'projects/mind-scan-home': { src: img22w1600, srcSet: `${img22w800} 800w, ${img22w1600} 1600w`, width: 1600, height: 779 },
-  'projects/mind-scan-upload': { src: img23w1600, srcSet: `${img23w800} 800w, ${img23w1600} 1600w`, width: 1600, height: 735 },
-  'projects/mind-scan-run-prediction': { src: img24w1600, srcSet: `${img24w800} 800w, ${img24w1600} 1600w`, width: 1600, height: 777 },
-  'projects/mind-scan-performance': { src: img25w1600, srcSet: `${img25w800} 800w, ${img25w1600} 1600w`, width: 1600, height: 778 },
-  'projects/mind-scan-insights': { src: img26w1600, srcSet: `${img26w800} 800w, ${img26w1600} 1600w`, width: 1600, height: 774 },
-  'projects/mind-scan-dataset': { src: img27w1600, srcSet: `${img27w800} 800w, ${img27w1600} 1600w`, width: 1600, height: 778 },
-  'projects/mind-scan-workflow': { src: img28w1024, srcSet: `${img28w600} 600w, ${img28w1024} 1024w`, width: 1024, height: 1536 },
-  'projects/eeg-patient-overview': { src: img29w1322, srcSet: `${img29w800} 800w, ${img29w1322} 1322w`, width: 1322, height: 743 },
-  'projects/eeg-demographic-overview': { src: img30w1322, srcSet: `${img30w800} 800w, ${img30w1322} 1322w`, width: 1322, height: 732 },
-  'projects/eeg-disorder-analysis': { src: img31w1320, srcSet: `${img31w800} 800w, ${img31w1320} 1320w`, width: 1320, height: 738 },
-  'projects/eeg-signal-analysis': { src: img32w1313, srcSet: `${img32w800} 800w, ${img32w1313} 1313w`, width: 1313, height: 738 },
-  'projects/cancer-executive-overview': { src: img33w1315, srcSet: `${img33w800} 800w, ${img33w1315} 1315w`, width: 1315, height: 737 },
-  'projects/cancer-clinical-significance': { src: img34w1316, srcSet: `${img34w800} 800w, ${img34w1316} 1316w`, width: 1316, height: 741 },
-  'projects/cancer-gene-chromosome': { src: img35w1314, srcSet: `${img35w800} 800w, ${img35w1314} 1314w`, width: 1314, height: 738 },
-  'projects/cancer-variant-risk': { src: img36w1315, srcSet: `${img36w800} 800w, ${img36w1315} 1315w`, width: 1315, height: 738 },
-  'projects/cancer-predictive-evidence': { src: img37w1315, srcSet: `${img37w800} 800w, ${img37w1315} 1315w`, width: 1315, height: 746 },
-  'projects/cancer-research-discovery': { src: img38w1318, srcSet: `${img38w800} 800w, ${img38w1318} 1318w`, width: 1318, height: 738 },
+  'achievements/anchor-mca-tcs-stage': { src: img22w1600, srcSet: `${img22w800} 800w, ${img22w1600} 1600w`, width: 1600, height: 1204 },
+  'achievements/anchor-mca-tcs-hall': { src: img23w1534, srcSet: `${img23w800} 800w, ${img23w1534} 1534w`, width: 1534, height: 580 },
+  'achievements/anchor-mca-podium': { src: img24w1600, srcSet: `${img24w800} 800w, ${img24w1600} 1600w`, width: 1600, height: 2133 },
+  'achievements/anchor-mca-lectern': { src: img25w1600, srcSet: `${img25w800} 800w, ${img25w1600} 1600w`, width: 1600, height: 2009 },
+  'achievements/anchor-mca-group': { src: img26w1600, srcSet: `${img26w800} 800w, ${img26w1600} 1600w`, width: 1600, height: 900 },
+  'achievements/anchor-bca-stage': { src: img27w1066, srcSet: `${img27w800} 800w, ${img27w1066} 1066w`, width: 1066, height: 1600 },
+  'projects/mind-scan-home': { src: img28w1600, srcSet: `${img28w800} 800w, ${img28w1600} 1600w`, width: 1600, height: 779 },
+  'projects/mind-scan-upload': { src: img29w1600, srcSet: `${img29w800} 800w, ${img29w1600} 1600w`, width: 1600, height: 735 },
+  'projects/mind-scan-run-prediction': { src: img30w1600, srcSet: `${img30w800} 800w, ${img30w1600} 1600w`, width: 1600, height: 777 },
+  'projects/mind-scan-performance': { src: img31w1600, srcSet: `${img31w800} 800w, ${img31w1600} 1600w`, width: 1600, height: 778 },
+  'projects/mind-scan-insights': { src: img32w1600, srcSet: `${img32w800} 800w, ${img32w1600} 1600w`, width: 1600, height: 774 },
+  'projects/mind-scan-dataset': { src: img33w1600, srcSet: `${img33w800} 800w, ${img33w1600} 1600w`, width: 1600, height: 778 },
+  'projects/mind-scan-workflow': { src: img34w1024, srcSet: `${img34w600} 600w, ${img34w1024} 1024w`, width: 1024, height: 1536 },
+  'projects/eeg-patient-overview': { src: img35w1322, srcSet: `${img35w800} 800w, ${img35w1322} 1322w`, width: 1322, height: 743 },
+  'projects/eeg-demographic-overview': { src: img36w1322, srcSet: `${img36w800} 800w, ${img36w1322} 1322w`, width: 1322, height: 732 },
+  'projects/eeg-disorder-analysis': { src: img37w1320, srcSet: `${img37w800} 800w, ${img37w1320} 1320w`, width: 1320, height: 738 },
+  'projects/eeg-signal-analysis': { src: img38w1313, srcSet: `${img38w800} 800w, ${img38w1313} 1313w`, width: 1313, height: 738 },
+  'projects/cancer-executive-overview': { src: img39w1315, srcSet: `${img39w800} 800w, ${img39w1315} 1315w`, width: 1315, height: 737 },
+  'projects/cancer-clinical-significance': { src: img40w1316, srcSet: `${img40w800} 800w, ${img40w1316} 1316w`, width: 1316, height: 741 },
+  'projects/cancer-gene-chromosome': { src: img41w1314, srcSet: `${img41w800} 800w, ${img41w1314} 1314w`, width: 1314, height: 738 },
+  'projects/cancer-variant-risk': { src: img42w1315, srcSet: `${img42w800} 800w, ${img42w1315} 1315w`, width: 1315, height: 738 },
+  'projects/cancer-predictive-evidence': { src: img43w1315, srcSet: `${img43w800} 800w, ${img43w1315} 1315w`, width: 1315, height: 746 },
+  'projects/cancer-research-discovery': { src: img44w1318, srcSet: `${img44w800} 800w, ${img44w1318} 1318w`, width: 1318, height: 738 },
 } as const;
 
 export type ImageKey = keyof typeof images;

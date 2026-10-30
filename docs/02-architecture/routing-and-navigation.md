@@ -4,8 +4,9 @@
 
 | Path | Page | Nav item | Title tag |
 |---|---|---|---|
-| `/` | HomePage | Home | Aditi Singh — AI/ML & Data Science |
+| `/` | HomePage | Home | Aditi Singh — Aspiring Assistant Professor, Computer Science |
 | `/about` | AboutPage | About | About · Aditi Singh |
+| `/research` | ResearchPage | Research | Research · Aditi Singh |
 | `/projects` | ProjectsPage | Projects | Projects · Aditi Singh |
 | `/projects/:slug` | ProjectDetail | Projects | `{project.title}` · Aditi Singh |
 | `/certificates` | CertificatesPage | Certificates | Certificates · Aditi Singh |
@@ -17,7 +18,7 @@
 | `/contact` | ContactPage | Contact | Contact · Aditi Singh |
 | `*` | NotFoundPage | — | Page not found |
 
-Nav order: **Home · About · Projects · Certificates · Achievements · Experience · Contact**. A detail route keeps its parent nav item active.
+Nav order: **Home · About · Research · Projects · Certificates · Achievements · Experience · Contact** (Research added 31 Oct 2026). A detail route keeps its parent nav item active.
 
 ## Modal-route pattern (detail views)
 

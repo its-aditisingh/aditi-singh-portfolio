@@ -67,7 +67,7 @@ export function CertificatesPage() {
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_380px] lg:gap-16">
           <SectionHeading
             as="h1"
-            index={4}
+            index={5}
             eyebrow="Certificates"
             title="Certificates"
             description={`${certificates.length} certificates · ${Math.round(statedHours)}+ learning hours — from Kaggle and Saylor to ISRO-IIRS.`}

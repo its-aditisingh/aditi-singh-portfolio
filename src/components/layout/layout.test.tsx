@@ -4,6 +4,7 @@ import { renderRoute } from '@/test/renderRoute';
 const NAV_ORDER = [
   'Home',
   'About',
+  'Research',
   'Projects',
   'Certificates',
   'Achievements',
@@ -17,7 +18,7 @@ beforeEach(() => {
 });
 
 describe('Navbar', () => {
-  it('renders the 7 nav links in order', async () => {
+  it('renders the 8 nav links in order', async () => {
     await renderRoute('/');
     const nav = screen.getByRole('navigation', { name: 'Main' });
     const labels = within(nav)
@@ -60,7 +61,7 @@ describe('Mobile menu', () => {
     fireEvent.click(openButton);
 
     const dialog = await screen.findByRole('dialog', { name: 'Site menu' });
-    expect(within(dialog).getAllByRole('link', { name: /home|about|projects|certificates|achievements|experience|contact/i })).toHaveLength(8); // 7 items + logo
+    expect(within(dialog).getAllByRole('link', { name: /home|about|research|projects|certificates|achievements|experience|contact/i })).toHaveLength(9); // 8 items + logo
     expect(document.body.style.overflow).toBe('hidden');
 
     fireEvent.keyDown(document, { key: 'Escape' });

@@ -1,6 +1,7 @@
 import {
   BadgeCheck,
   BriefcaseBusiness,
+  FlaskConical,
   FolderGit2,
   House,
   Send,
@@ -13,6 +14,7 @@ import type { NavItem } from '@/types';
 export const navItems: NavItem[] = [
   { label: 'Home', to: '/', icon: House },
   { label: 'About', to: '/about', icon: UserRound },
+  { label: 'Research', to: '/research', icon: FlaskConical },
   { label: 'Projects', to: '/projects', icon: FolderGit2 },
   { label: 'Certificates', to: '/certificates', icon: BadgeCheck },
   { label: 'Achievements', to: '/achievements', icon: Trophy },

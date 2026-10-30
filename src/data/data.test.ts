@@ -6,6 +6,7 @@ import { pings, stats } from './highlights';
 import { journey } from './journey';
 import { profile } from './profile';
 import { projects } from './projects';
+import { paperNotes, workingPapers } from './research';
 import { currentlyLearning, skillGroups } from './skills';
 import type { CertCategory, ImageRef } from '@/types';
 
@@ -32,6 +33,7 @@ const ISO = /^\d{4}(-\d{2}(-\d{2})?)?$/;
 const PAGES = [
   '/',
   '/about',
+  '/research',
   '/projects',
   '/certificates',
   '/achievements',
@@ -90,8 +92,10 @@ describe('slugs', () => {
 describe('counts', () => {
   it('has the expected number of items', () => {
     expect(certificates).toHaveLength(14);
-    expect(projects.length).toBeGreaterThanOrEqual(4);
-    expect(achievements.length).toBeGreaterThanOrEqual(6);
+    expect(projects.length).toBeGreaterThanOrEqual(5);
+    // Grades live only in About › Education (owner request, 31 Oct)
+    expect(achievements.length).toBeGreaterThanOrEqual(2);
+    expect(workingPapers.length).toBeGreaterThanOrEqual(1);
     expect(experience.length).toBeGreaterThanOrEqual(2);
     expect(education).toHaveLength(2);
   });
@@ -127,6 +131,25 @@ describe('counts', () => {
 });
 
 describe('required fields', () => {
+  it('every project names its dataset and source (owner request)', () => {
+    for (const p of projects) {
+      expect(p.dataset.name.length, p.slug).toBeGreaterThan(5);
+      expect(p.dataset.description.length, p.slug).toBeGreaterThan(20);
+      expect(p.dataset.source.length, p.slug).toBeGreaterThan(10);
+      p.dataset.links.forEach((link) => expect(link.href).toMatch(/^https:\/\//));
+    }
+  });
+
+  it('no achievement repeats a grade or score', () => {
+    for (const a of achievements) expect(a.metric?.value ?? '', a.slug).not.toMatch(/%|\bA1\b/);
+  });
+
+  it('reading notes are complete when present', () => {
+    for (const note of paperNotes) {
+      expect(note.title && note.authors && note.venue && note.summary).toBeTruthy();
+    }
+  });
+
   it('every image has alt text and dimensions', () => {
     for (const img of allImages()) {
       expect(img.alt.trim().length, img.src).toBeGreaterThan(3);
@@ -152,6 +175,7 @@ describe('files', () => {
   it('every downloadable file exists in public/', () => {
     const urls = [
       profile.resumeUrl,
+      ...workingPapers.map((paper) => paper.fileUrl),
       ...certificates.map((c) => c.fileUrl),
       ...achievements.flatMap((a) => (a.proof ? [a.proof.fileUrl] : [])),
       ...experience.flatMap((e) => (e.proof ? [e.proof.fileUrl] : [])),
@@ -208,6 +232,7 @@ describe('cross-links', () => {
       ...projects.flatMap((p) =>
         p.relatedExperience ? [`/experience/${p.relatedExperience}`] : [],
       ),
+      ...workingPapers.flatMap((w) => (w.relatedProject ? [`/projects/${w.relatedProject}`] : [])),
     ];
     for (const href of hrefs) expect(isKnownRoute(href), href).toBe(true);
   });

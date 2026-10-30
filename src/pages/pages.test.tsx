@@ -10,19 +10,31 @@ describe('Home (docs/03-features/01-home.md)', () => {
 
   it('shows name, roles, headline and career objective', async () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Aditi Singh' })).toBeInTheDocument();
-    expect(screen.getByText(/Aspiring Assistant Professor, AI\/ML Engineer/)).toBeInTheDocument();
+    // Assistant Professor only — no AI/ML Engineer role in the heading (owner request, 31 Oct)
+    expect(screen.getByText('Aspiring Assistant Professor')).toBeInTheDocument();
+    expect(screen.queryByText(/AI\/ML Engineer/)).not.toBeInTheDocument();
     expect(screen.getByText('MCA · AI/ML & Data Science')).toBeInTheDocument();
     expect(screen.getByText(/I aim to teach Computer Science/)).toBeInTheDocument();
-    expect(screen.getByText('Open to Assistant Professor & AI/ML roles')).toBeInTheDocument();
+    expect(
+      screen.getByText('Open to Assistant Professor roles in Computer Science'),
+    ).toBeInTheDocument();
   });
 
-  it('has the Get In Touch and resume CTAs', async () => {
+  it('shows research interests right above the Contact, Projects and Resume buttons', async () => {
     const hero = screen.getByRole('region', { name: 'Aditi Singh' });
+    const interests = within(hero).getByRole('list', { name: 'Research interests' });
+    expect(within(interests).getByText('Healthcare Analytics')).toBeInTheDocument();
+    const projectsLink = within(hero).getByRole('link', { name: /^projects$/i });
+    expect(projectsLink).toHaveAttribute('href', '/projects');
+    // the interests come before the buttons in reading order
+    expect(
+      interests.compareDocumentPosition(projectsLink) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
     expect(within(hero).getByRole('link', { name: /get in touch/i })).toHaveAttribute(
       'href',
       '/contact',
     );
-    expect(within(hero).getByRole('link', { name: /download resume/i })).toHaveAttribute(
+    expect(within(hero).getByRole('link', { name: /resume/i })).toHaveAttribute(
       'href',
       '/resume/Aditi-Singh-Resume.pdf',
     );
@@ -44,7 +56,7 @@ describe('Home (docs/03-features/01-home.md)', () => {
 
   it('links every section from the explore grid', async () => {
     const explore = screen.getByRole('region', { name: 'Find your way around' });
-    expect(within(explore).getAllByRole('link')).toHaveLength(6);
+    expect(within(explore).getAllByRole('link')).toHaveLength(7);
   });
 });
 
@@ -97,5 +109,26 @@ describe('About (docs/03-features/02-about.md)', () => {
     await renderRoute('/about#education');
     await waitFor(() => expect(scrollSpy).toHaveBeenCalled());
     expect(scrollSpy.mock.contexts[0]).toHaveAttribute('id', 'education');
+  });
+});
+
+describe('Research (docs/03-features/08-research.md)', () => {
+  it('shows interests and the methodology PDF, and the reading notes', async () => {
+    await renderRoute('/research');
+    expect(screen.getByRole('heading', { level: 1, name: 'Research' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Research interests' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /read the pdf/i })).toHaveAttribute(
+      'href',
+      '/research/mind-scan-analyzer-methodology.pdf',
+    );
+    expect(screen.getByRole('link', { name: /mind scan analyzer/i })).toHaveAttribute(
+      'href',
+      '/projects/mind-scan-analyzer',
+    );
+    expect(screen.getByRole('heading', { name: 'Reading notes' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /self-supervised learning/i })).toHaveAttribute(
+      'href',
+      'https://arxiv.org/abs/2301.05712',
+    );
   });
 });

@@ -1,95 +1,50 @@
 # Content: Projects
 
-Source: resume + GitHub repos, including the screenshots committed in each repo (fetched 29 Oct 2026). → `src/data/projects.ts`
+Source: the GitHub repos (README, code, committed screenshots), fetched 29–31 Oct 2026. → `src/data/projects.ts` (the source of truth for exact wording).
 Screenshots are downloaded to `assets-src/projects/` (git-ignored) and converted to WebP by `npm run images`.
 
+**Rule (owner, 31 Oct):** every project must state its **dataset / data source** (`dataset` field — name, description, source, citation, links). The data tests enforce it.
+
+Order: Mind Scan Analyzer (featured) · Cancer Variant Prioritization (ML) · Tesla Stock Price Prediction · EEG Analysis Dashboard · Cancer Variant Analysis Dashboard.
+
 ---
 
-## 01 · Mind Scan Analyzer  `slug: mind-scan-analyzer` · featured
+## 01 · Mind Scan Analyzer  `mind-scan-analyzer` · featured · AI / ML
 | Field | Value |
 |---|---|
-| Tagline | EEG-based mental disorder prediction platform |
-| Category | AI / ML |
-| Context | MCA Final Year Project |
-| App name (in UI) | NeuroScan — EEG AI Classifier |
-| Summary | An AI-powered platform that classifies resting-state EEG features into seven mental-disorder categories with a Random Forest model — running entirely in the browser, with dashboards for performance, insights and the dataset. |
-| Problem | EEG data is hard to interpret without specialised tools or expertise. |
-| Solution | Upload an EEG feature CSV (BRMH schema) and get per-row disorder predictions instantly; the trained model is exported to the web app so inference runs locally in the browser. Performance, feature-importance and dataset views explain what the model does. |
-| Features | Upload & Predict (CSV drop-zone, sample data, data preview) · Seven-class disorder classification · Model performance view (accuracy, F1, confusion matrix, per-class report) · Model insights (top-10 feature importance) · Dataset explorer (class distribution, feature schema) · Runs locally in the browser · Light/dark mode |
-| Pipeline (from the repo's workflow diagram) | `Raw EEG Data` → `Data Cleaning` → `Feature Engineering` → `Model Processing` → `Prediction` → `Visualization & Reporting` |
-| Dataset | BRMH (Bukhyun Research Mental Health) resting-state EEG — 945 patients · 1,149 EEG features · 7 disorder classes |
-| Results (from the app's *Model performance* screen) | **98.41% accuracy** on 189 held-out samples (20% stratified split, `random_state=42`) · **Macro F1 0.98** · **Weighted F1 0.98** · Random Forest with **300 trees** using **10 features** selected from 1,149 · Presented during MCA final-year evaluation |
-| Tech stack | **Frontend:** React, TypeScript, Vite, Tailwind CSS, shadcn/ui · **AI / Data:** Python, Scikit-learn (Random Forest), TensorFlow, NumPy, Pandas · **API:** FastAPI · **Tools:** Git, GitHub, VS Code |
-| Future scope | Real-time EEG monitoring · More advanced ML models · User authentication & profiles · Cloud deployment · Wearable EEG integration · Exportable PDF reports · Advanced analytics dashboard · Mobile app |
-| Links | Live: https://mind-scan-analyzer.lovable.app/ · GitHub: https://github.com/its-aditisingh/Mind-Scan-Analyzer |
-| Cover | `MindScan-Analyzer-Homepage.png` |
-| Gallery (order) | Homepage · Upload & Predict (`Prediction-Interface`) · Run prediction · Model performance · Model insights · Dataset · Project workflow diagram |
-| Not used | `System_Architecture.png` — generic diagram showing CNN/LSTM and a "Relaxed 92.45%" output, which contradicts the real Random Forest, 7-class app (and has a typo in the title). Suggest Aditi update it in the repo too. |
-| Cursor tour hotspots (on cover, % of width/height — placed beside each target, not on it) | 1 (41, 4) "Model loads and runs locally in the browser" · 2 (46, 27) "Random Forest · 300 trees" · 3 (20, 75) "Upload an EEG CSV to classify" · 4 (52, 75) "See accuracy, F1 and confusion matrix" |
-| Before / After | Before: *Dataset* (raw EEG features & classes) · After: *Model performance* (98.41% accuracy) |
+| Context | MCA Final Year Project · app name "NeuroScan — EEG AI Classifier" |
+| Method (from `scripts/export_model.py`) | drop `no.`, `eeg.date`, `specific.disorder` → median / mode imputation + label encoding → StandardScaler → stratified 80/20 split (`random_state=42`) → `SelectKBest(f_classif, k=10)` fitted on train → RandomForest (300 trees, `class_weight="balanced"`) → JSON export → TypeScript `predict_proba` in the browser |
+| Dataset | **BRMH resting-state EEG** — 945 subjects (850 patients, 95 healthy controls), 1,149 columns (demographics + absolute band power and coherence). Park et al. (2021), *Frontiers in Psychiatry* 12:707581, doi 10.3389/fpsyt.2021.707581; public copy: kaggle.com/datasets/shashwatwork/eeg-psychiatric-disorders-dataset |
+| Class distribution | Mood 266 · Addictive 186 · Trauma/stress 128 · Schizophrenia 117 · Anxiety 107 · Healthy 95 · OCD 46 (from the EEG dashboard) |
+| Metrics shown | Dataset facts only: 945 subjects · 7 groups · 1,149 columns · 10 selected features |
+| Metrics (restored, revision 2) | 98.41% accuracy on 189 held-out samples · macro F1 0.98 · 300 trees · 10 / 1,149 features. **Owner confirmed (31 Oct) these are the real results, demonstrated in the MCA viva.** Note: the repo's bundled `src/model/model.json` still carries a *"demo model trained on synthetic EEG-shaped data"* note and 60 trees — Aditi should re-export the real model so the repo matches. |
+| Write-up | 2-page methodology note on the Research page (`research/mind-scan-analyzer-methodology.html` → PDF) |
+| Links | Live: mind-scan-analyzer.lovable.app · GitHub: its-aditisingh/Mind-Scan-Analyzer |
 
-> Stack follows GitHub (decision 29 Oct 2026): README tech list + repo "About" line + what the committed screenshots show (Random Forest, in-browser inference).
-
----
-
-## 02 · EEG Analysis Dashboard  `slug: eeg-analysis-dashboard`
+## 02 · Cancer Variant Prioritization (ML)  `cancer-variant-prioritization-ml` · AI / ML  (new, 31 Oct)
 | Field | Value |
 |---|---|
-| Tagline | Healthcare analytics dashboard for EEG data |
-| Category | Data Analytics |
-| Context | Power BI Dashboards Portfolio |
-| Summary | A four-page Power BI report on 945 EEG patients across 7 disorder categories — patient overview, demographics, disorder analysis and EEG frequency-band signals. |
-| Problem | Raw EEG datasets are difficult to explore and summarise for non-technical stakeholders. |
-| Solution | Data cleaned and modelled in Power Query, measures built with DAX, and findings presented as interactive Power BI visuals with gender, age-range and disorder filters. |
-| Features | KPI cards (945 patients · 7 disorders · avg age 30.6 · avg IQ 100.18) · Disorder & gender distribution · Age distribution · EEG frequency-band analysis (delta, theta, alpha, beta, gamma) · Gender / age / disorder filters |
-| Pipeline | `EEG Dataset` → `Power Query (clean & shape)` → `Data Model` → `DAX Measures` → `Interactive Report` |
-| Tech stack | Power BI, Power Query, DAX, Data Analytics, Data Visualization |
-| Links | Live: https://eeg-analysis-dashboard.vercel.app · GitHub: https://github.com/its-aditisingh/PowerBI-Dashboards-Portfolio |
-| Cover | `EEG-Patient-Overview.png` |
-| Gallery | EEG Patient Overview · Demographic Overview · Disorder Analysis · EEG Signal Analysis |
+| Repo | github.com/its-aditisingh/cancer-variant-prioritization-ml |
+| Method | mean/mode imputation → StandardScaler + OneHotEncoder (ColumnTransformer) → 80:20 split → RandomForest (200 trees, depth 10, rs 42) → accuracy, confusion matrix, P/R/F1 → feature importance → Pickle |
+| Dataset | `cancer_variant_prioritization_dataset.csv` in the repo — 10,000 variants × 9 columns (chromosome, position, gene, variant type, population AF, CADD, SIFT, PolyPhen, clinical significance). **Source: Kaggle** — [Cancer Variant Dataset for Machine Learning](https://www.kaggle.com/datasets/punithpunk/cancer-variant-dataset-for-machine-learning) by Punith Punk, CC0; publisher describes it as synthetic. Verified: same file name and identical size (773,438 bytes). Also used by the Cancer Variant Analysis Dashboard. |
+| Results | No figures (README: report only after verification). Not for clinical use. |
 
----
-
-## 03 · Cancer Variant Analysis Dashboard  `slug: cancer-variant-analysis-dashboard`
+## 03 · Tesla Stock Price Prediction  `tesla-stock-price-prediction` · AI / ML  (new, 31 Oct)
 | Field | Value |
 |---|---|
-| Tagline | Prioritising cancer genetic variants for research |
-| Category | Data Analytics |
-| Context | Power BI Dashboards Portfolio |
-| Report title (in UI) | Cancer Variant Prioritization Dashboard |
-| Summary | A six-page Power BI report that prioritises ~10K cancer genetic variants across 20 genes by clinical significance, risk and predictive evidence. |
-| Problem | Genetic variant data is large and hard to interpret for clinical significance and risk. |
-| Solution | An interactive Power BI report that breaks variants down by clinical significance, variant type, gene and chromosome, with risk-assessment and predictive-evidence views. |
-| Features | KPI cards (10K variants · 20 genes · mean CADD 19.93 · 2K pathogenic · 3K likely pathogenic) · Clinical-significance distribution · Variant-type distribution · Gene & chromosome analysis · Variant risk assessment · Predictive evidence · Research discovery · Gene / chromosome / significance filters |
-| Pipeline | `Variant Dataset` → `Power Query` → `Data Model` → `DAX Measures` → `Insights Report` |
-| Tech stack | Power BI, Power Query, DAX, Data Analytics, Data Visualization |
-| Links | GitHub: https://github.com/its-aditisingh/PowerBI-Dashboards-Portfolio (folder `Cancer-Variant-Analysis-Dashboard`) |
-| Cover | `Executive-overview-dashboard.png` |
-| Gallery | Executive Overview · Clinical Significance Deep-dive · Gene & Chromosome Analysis · Variant Risk Assessment · Predictive Evidence · Research Discovery |
+| Repo | github.com/its-aditisingh/tesla-stock-price-prediction |
+| Method | missing values + date parsing → year/month/day, `Prev_Close`, 5-day rolling mean → chronological 80:20 split → StandardScaler → Linear Regression → MSE / RMSE / R² |
+| Dataset | `tsla.csv` in the repo — 3,948 trading days, 29 Jun 2010 – 10 Mar 2026, OHLC + volume. **Source: Kaggle** (owner). Values are Yahoo Finance split-adjusted prices; no Kaggle file matched byte-for-byte, so the exact Kaggle page is still to be confirmed (Q15) — until then only the GitHub CSV is linked. |
+| Results | Notebook reports R² 0.9986 / RMSE 3.50 but the README itself flags **target leakage** (`MA_5` includes the same day's close). Shown as a lesson, not an achievement. |
+
+## 04 · EEG Analysis Dashboard  `eeg-analysis-dashboard` · Data Analytics
+Power BI, 4 pages; 945 patients, 7 disorders, avg age 30.6, avg IQ 100.18. **Dataset: BRMH** (same as Mind Scan — inferred from identical counts; confirm, Q16). Live: eeg-analysis-dashboard.vercel.app.
+
+## 05 · Cancer Variant Analysis Dashboard  `cancer-variant-analysis-dashboard` · Data Analytics
+Power BI, 6 pages; 10K variants, 20 genes, mean CADD 19.93. **Dataset: same CSV as project 02.**
 
 ---
 
-## 04 · Predictive Analytics & ML Models (Internship)  `slug: shanti-infosoft-ml-internship-work` ✎
-Built only from the resume's internship bullets — no invented client names, datasets or metrics. Company work is usually confidential, so there are no code/demo links.
-
-| Field | Value |
-|---|---|
-| Tagline | Industry machine-learning work at a CMMI Level 5 company |
-| Category | AI / ML |
-| Context | AI/ML Internship · Shanti Infosoft LLP, Indore |
-| Period | Jan 2026 – Jun 2026 |
-| Summary | Python-based machine learning models and predictive analytics developed during an industry-immersion internship, from data preparation to decision-ready reports. |
-| Problem | Raw business data has to become reliable predictions and clear reports before it can support decisions. |
-| Solution | Preprocessed data, engineered features, built and evaluated Scikit-Learn models, and turned the results into visualizations and analytical reports. |
-| Features | Data preprocessing · Feature engineering · Model development · Model evaluation · Visual analytics & reporting |
-| Pipeline | `Raw Data` → `Preprocessing` → `Feature Engineering` → `Model Training` → `Evaluation` → `Reports & Visuals` |
-| Tech stack | Python, Scikit-Learn, Pandas, NumPy |
-| Cover | No screenshot → generated cover: accent gradient + pipeline icons (lucide `Database → Wand2 → Brain → ChartLine`) |
-| Links | Internal link to Experience entry `/experience/shanti-infosoft-ai-ml-intern` |
-| Note on page | "Details of client work are confidential." |
-
----
-
-## Wanted (later)
-- Real internship project name / screenshots (if shareable).
-- Any BCA / MCA mini-projects with GitHub links.
+## Removed (31 Oct 2026)
+- `shanti-infosoft-ml-internship-work` — generic internship write-up; replaced by the two GitHub ML projects (owner request). The internship stays under Experience.
+- `System_Architecture.png` (Mind Scan) — still excluded: shows CNN/LSTM, contradicts the real model.

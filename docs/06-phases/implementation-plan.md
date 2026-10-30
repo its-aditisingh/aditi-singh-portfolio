@@ -161,6 +161,23 @@ Notes:
 - [ ] Final content review **with Aditi** (✎ items in `05-content/`)
 - [ ] Add the portfolio link to resume, LinkedIn, GitHub profile
 
+## Revision 1 — owner feedback ✅ (31 Oct 2026)
+- [x] Hero: only **Aspiring Assistant Professor** (rotator + WordRotator removed); badge "Open to Assistant Professor roles in Computer Science"; titles and share card updated. About's "Open to" list unchanged (owner).
+- [x] Research interests above the hero buttons; buttons now Get In Touch · Projects · Resume
+- [x] New **Research** page + nav item ([spec](../03-features/08-research.md)); 2-page Mind Scan methodology PDF (`npm run research:pdf`); reading notes ready for Aditi's summaries (Q18)
+- [x] Achievements: grade repeats removed (MCA, BCA, Saylor, AWS); Anchor gets 6 photos and a photo tile
+- [x] Projects: generic internship project replaced by the GitHub ML repos (Cancer Variant Prioritization, Tesla Stock Price Prediction)
+- [x] **Every project shows its dataset & source** (`ProjectDataset`, required; data test)
+- [x] ~~Mind Scan: demo-model scores (98.41%) removed~~ — reverted in revision 2
+- [x] AWS training starts March 2025; same-month ranges show one month, no "0 months"
+- [x] `npm run images`: checks all sources before deleting anything (a renamed file had wiped the outputs mid-run)
+
+## Revision 2 — owner feedback ✅ (31 Oct 2026)
+- [x] AWS training **Feb 2025 – May 2025** (3 months); journey item "May 2025"
+- [x] Reading notes: 3 paper summaries (ASD EEG CNN–LSTM, XAI for Healthcare 5.0, SSL survey)
+- [x] Datasets: cancer variant → Kaggle (punithpunk, verified); Tesla → "Downloaded from Kaggle" (exact page pending, Q15)
+- [x] Mind Scan 98.41% / macro F1 0.98 restored (owner-confirmed, viva); methodology PDF section 5 now reports results with a per-class table
+
 ## Rough effort
 | Phase | Estimate |
 |---|---|

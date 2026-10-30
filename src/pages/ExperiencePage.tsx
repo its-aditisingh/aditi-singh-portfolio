@@ -30,7 +30,7 @@ export function ExperiencePage() {
       <section className="container-page pt-10 md:pt-16">
         <SectionHeading
           as="h1"
-          index={6}
+          index={7}
           eyebrow="Experience"
           title="Experience"
           description="Industry internship and training, on a timeline."

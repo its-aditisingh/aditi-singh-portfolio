@@ -34,7 +34,6 @@ export const experience: Experience[] = [
     testimonial:
       'Demonstrated excellent skills in AI/ML. Their contributions to given project were highly valuable to our team. We commend them for their dedication and professionalism throughout the internship.',
     compare: classroomVsIndustry,
-    related: { label: 'Internship work', to: '/projects/shanti-infosoft-ml-internship-work' },
     proof: {
       image: image(
         'certificates/shanti-infosoft-internship',
@@ -50,8 +49,9 @@ export const experience: Experience[] = [
     organisation: 'Anudip Foundation for Social Welfare',
     type: 'Training',
     location: 'Indore, Madhya Pradesh',
-    // Start month not known yet — owner will add (Q6)
-    end: '2025-03',
+    // Owner (31 Oct 2026): February – May 2025
+    start: '2025-02',
+    end: '2025-05',
     summary:
       'Completed 332 hours of structured training on Amazon Web Services at the Anudip Foundation Skill and Career Development Center (supported by Accenture) and received a Certificate of Merit with Grade A1.',
     facts: ['332 hours', 'Grade A1', 'Supported by Accenture'],

@@ -30,16 +30,16 @@ export function ProjectsPage() {
     <CollectionRoute>
       <Seo
         title="Projects"
-        description="AI/ML and data analytics projects by Aditi Singh — EEG-based mental disorder prediction, Power BI healthcare dashboards and industry ML work."
+        description="AI/ML and data analytics projects by Aditi Singh — EEG-based mental disorder prediction, cancer variant classification, stock-price regression and Power BI healthcare dashboards."
         path="/projects"
       />
       <section className="container-page pt-10 md:pt-16">
         <SectionHeading
           as="h1"
-          index={3}
+          index={4}
           eyebrow="Projects"
           title="Projects"
-          description="From an EEG-based prediction platform to Power BI healthcare dashboards — open any project for the full story."
+          description="EEG-based classification, genomic and stock-price machine learning, and Power BI healthcare dashboards — every project lists its dataset. Open any one for the full story."
         />
 
         {categories.length > 1 && (

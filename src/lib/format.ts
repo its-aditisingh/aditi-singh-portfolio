@@ -52,8 +52,16 @@ export function formatDuration(months: number) {
   return `${years} yr${years === 1 ? '' : 's'}${rest ? ` ${rest} mo` : ''}`;
 }
 
-/** "Jan 2026 – Jun 2026", "Mar 2025" (end only), "Jan 2026 – Present". */
+/** Duration label for a range, or null when unknown or under a month ("5 months"). */
+export function durationLabel(start?: string, end?: string) {
+  if (!start || !end) return null;
+  const months = monthsBetween(start, end);
+  return months >= 1 ? formatDuration(months) : null;
+}
+
+/** "Jan 2026 – Jun 2026", "Mar 2025" (end only or same month), "Jan 2026 – Present". */
 export function formatRange(start?: string, end?: string) {
+  if (start && end && formatMonthYear(start) === formatMonthYear(end)) return formatMonthYear(end);
   if (start && end) return `${formatMonthYear(start)} – ${formatMonthYear(end)}`;
   if (end) return formatMonthYear(end);
   if (start) return `${formatMonthYear(start)} – Present`;

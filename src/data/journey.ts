@@ -12,10 +12,10 @@ export const journey: JourneyItem[] = [
     when: '2024',
     title: 'BCA completed — 94.8%',
     detail: 'Began MCA (AI/ML & Data Science) at AKS University, Satna',
-    href: '/achievements/bca-94-8-percent',
+    href: '/about#education',
   },
   {
-    when: 'Mar 2025',
+    when: 'May 2025',
     title: 'AWS training — Grade A1',
     detail: '332-hour Advanced Program on Amazon Web Services (Anudip Foundation × Accenture)',
     href: '/experience/anudip-aws-training',
@@ -36,7 +36,7 @@ export const journey: JourneyItem[] = [
     when: 'Jun 2026',
     title: 'Internship completed',
     detail: 'Python ML models, feature engineering, predictive analytics and reports',
-    href: '/projects/shanti-infosoft-ml-internship-work',
+    href: '/experience/shanti-infosoft-ai-ml-intern',
   },
   {
     when: '2026',

@@ -11,7 +11,7 @@ export function personJsonLd(siteUrl: string) {
     name: profile.name,
     url: `${siteUrl}/`,
     image: `${siteUrl}/og-image.png`,
-    jobTitle: profile.headline,
+    jobTitle: profile.roles[0] ?? profile.headline,
     description: profile.objectiveShort,
     email: `mailto:${profile.email}`,
     address: {

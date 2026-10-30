@@ -7,7 +7,7 @@ import react from '@vitejs/plugin-react';
 // Live Vercel URL; VITE_SITE_URL (set in Vercel) overrides it
 const DEFAULT_SITE_URL = 'https://its-aditisingh-portfolio.vercel.app';
 
-const PAGES = ['/', '/about', '/projects', '/certificates', '/achievements', '/experience', '/contact'];
+const PAGES = ['/', '/about', '/research', '/projects', '/certificates', '/achievements', '/experience', '/contact'];
 const COLLECTIONS = ['projects', 'certificates', 'achievements', 'experience'] as const;
 
 /** Slugs straight from the data files, so the sitemap can't drift from the content. */

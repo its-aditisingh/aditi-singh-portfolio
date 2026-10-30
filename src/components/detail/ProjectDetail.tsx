@@ -1,10 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, Github, Lock } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, Database, Github, Lock } from 'lucide-react';
 import { BeforeAfter } from '@/components/animations/BeforeAfter';
 import { CursorTour } from '@/components/animations/CursorTour';
 import { NumberRoll } from '@/components/animations/NumberRoll';
 import { PipelineSteps } from '@/components/animations/PipelineSteps';
-import { ProjectCoverFallback } from '@/components/cards/ProjectCoverFallback';
 import { Seo } from '@/components/layout/Seo';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -104,21 +103,21 @@ export function ProjectDetail() {
         )}
       </div>
 
-      {/* 2. Cover + cursor tour */}
-      <div className="mt-8">
-        {project.cover && project.cursorTour ? (
-          <CursorTour image={project.cover} stops={project.cursorTour} priority />
-        ) : project.cover ? (
-          <ResponsiveImage
-            image={project.cover}
-            sizes="(min-width: 1024px) 900px, 100vw"
-            priority
-            className="w-full rounded-card border border-line"
-          />
-        ) : (
-          <ProjectCoverFallback className="aspect-[16/7] rounded-card border border-line" />
-        )}
-      </div>
+      {/* 2. Cover + cursor tour — notebook projects have no screenshot, so nothing is shown */}
+      {project.cover && (
+        <div className="mt-8">
+          {project.cursorTour ? (
+            <CursorTour image={project.cover} stops={project.cursorTour} priority />
+          ) : (
+            <ResponsiveImage
+              image={project.cover}
+              sizes="(min-width: 1024px) 900px, 100vw"
+              priority
+              className="w-full rounded-card border border-line"
+            />
+          )}
+        </div>
+      )}
 
       {project.metrics && (
         <dl className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -148,12 +147,53 @@ export function ProjectDetail() {
             <p className="mt-1.5 text-ink/80">{project.solution}</p>
           </div>
         </div>
-        {project.dataset && (
-          <p className="mt-6 rounded-xl bg-surface-2 px-4 py-3 text-sm text-ink/85">
-            <span className="font-semibold">Dataset: </span>
-            {project.dataset}
-          </p>
-        )}
+      </DetailSection>
+
+      {/* 3b. Dataset — required on every project */}
+      <DetailSection title="Dataset & source">
+        <div className="rounded-card border border-line bg-surface p-5 md:p-6">
+          <div className="flex items-start gap-3">
+            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
+              <Database aria-hidden className="size-[18px]" />
+            </span>
+            <div className="min-w-0">
+              <Subheading className="font-bold leading-snug text-ink">
+                {project.dataset.name}
+              </Subheading>
+              <p className="mt-1.5 text-sm text-ink/80">{project.dataset.description}</p>
+            </div>
+          </div>
+          <dl className="mt-5 space-y-3 border-t border-line pt-4 text-sm">
+            <div className="sm:flex sm:gap-4">
+              <dt className="w-24 shrink-0 font-semibold text-ink">Source</dt>
+              <dd className="mt-0.5 text-ink/80 sm:mt-0">{project.dataset.source}</dd>
+            </div>
+            {project.dataset.citation && (
+              <div className="sm:flex sm:gap-4">
+                <dt className="w-24 shrink-0 font-semibold text-ink">Cite as</dt>
+                <dd className="mt-0.5 text-ink/80 sm:mt-0">{project.dataset.citation}</dd>
+              </div>
+            )}
+          </dl>
+          {project.dataset.links.length > 0 && (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {project.dataset.links.map((link) => (
+                <li key={link.href}>
+                  <Button
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    size="sm"
+                    icon={ArrowUpRight}
+                  >
+                    {link.label}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </DetailSection>
 
       {/* 4. Pipeline */}

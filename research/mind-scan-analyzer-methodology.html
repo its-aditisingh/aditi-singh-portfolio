@@ -1,0 +1,264 @@
+<!doctype html>
+<!--
+  Source of public/research/mind-scan-analyzer-methodology.pdf.
+  Edit this file, then run `npm run research:pdf` (scripts/build-research-pdf.mjs).
+  Facts come from the Mind-Scan-Analyzer repository (scripts/export_model.py, src/model/*),
+  the dataset paper (Park et al., 2021), the public dataset page and the evaluation results
+  Aditi reported and demonstrated in her MCA final-year viva — nothing else.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mind Scan Analyzer — Methodology note</title>
+    <style>
+      @page { size: A4; margin: 15mm 17mm 14mm; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Cambria, Georgia, 'Times New Roman', serif;
+        font-size: 9.6pt;
+        line-height: 1.38;
+        color: #16130f;
+      }
+      header { border-bottom: 2px solid #ea5a24; padding-bottom: 7px; margin-bottom: 9px; }
+      .kicker {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 7.5pt;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #b8410f;
+        margin: 0;
+      }
+      h1 { font-size: 15.5pt; line-height: 1.2; margin: 4px 0 5px; }
+      .byline { font-family: 'Segoe UI', Arial, sans-serif; font-size: 8.4pt; color: #4a443e; margin: 0; }
+      .abstract {
+        background: #fbf3ee;
+        border-left: 3px solid #ea5a24;
+        padding: 6px 9px;
+        margin: 0 0 8px;
+        font-size: 9.1pt;
+      }
+      .abstract b { font-family: 'Segoe UI', Arial, sans-serif; font-size: 8pt; letter-spacing: 0.06em; text-transform: uppercase; }
+      h2 {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 10pt;
+        margin: 9px 0 3px;
+        color: #16130f;
+      }
+      h2 span { color: #b8410f; margin-right: 4px; }
+      p { margin: 0 0 5px; text-align: justify; hyphens: auto; }
+      ul, ol { margin: 2px 0 5px; padding-left: 16px; }
+      li { margin: 0 0 2px; }
+      code { font-family: Consolas, 'Courier New', monospace; font-size: 8.4pt; background: #f2ece7; padding: 0 2px; border-radius: 2px; }
+      .cols { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 14px; align-items: start; }
+      table { width: 100%; border-collapse: collapse; font-size: 8.6pt; margin: 3px 0 4px; }
+      th, td { padding: 2.5px 5px; border-bottom: 1px solid #e6ddd6; text-align: left; }
+      th { font-family: 'Segoe UI', Arial, sans-serif; font-size: 7.8pt; text-transform: uppercase; letter-spacing: 0.05em; color: #6e655e; }
+      td.n { text-align: right; font-variant-numeric: tabular-nums; }
+      tfoot td { font-weight: bold; border-bottom: none; }
+      .caption { font-family: 'Segoe UI', Arial, sans-serif; font-size: 7.6pt; color: #6e655e; margin: 0 0 4px; }
+      .flow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 4px 0 3px; }
+      .flow div {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 7.6pt;
+        border: 1px solid #ea5a24;
+        border-radius: 4px;
+        padding: 2px 5px;
+        background: #fff;
+      }
+      .flow i { color: #ea5a24; font-style: normal; font-size: 8pt; }
+      .note {
+        border: 1px solid #e6ddd6;
+        border-radius: 4px;
+        padding: 5px 8px;
+        margin: 4px 0 6px;
+        background: #fffdfb;
+      }
+      .refs { font-size: 8.1pt; line-height: 1.32; padding-left: 18px; }
+      .refs li { margin-bottom: 2px; }
+      footer {
+        margin-top: 8px;
+        padding-top: 5px;
+        border-top: 1px solid #e6ddd6;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 7.4pt;
+        color: #6e655e;
+      }
+      .break { break-before: page; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <p class="kicker">Methodology note · October 2026</p>
+      <h1>Mind Scan Analyzer: Classifying Psychiatric Disorder Groups from Resting-State EEG Features with a Browser-Deployed Random Forest</h1>
+      <p class="byline">
+        Aditi Singh · MCA (AI/ML &amp; Data Science), AKS University, Satna, India · adytisingh@gmail.com ·
+        github.com/its-aditisingh/Mind-Scan-Analyzer
+      </p>
+    </header>
+
+    <p class="abstract">
+      <b>Abstract.</b> Mind Scan Analyzer is a web tool for exploring machine-learning classification of
+      psychiatric disorder groups from resting-state quantitative EEG (qEEG) features. This note documents
+      the data, preprocessing, feature selection, model, deployment design and results of the project.
+      A Random Forest classifier using ten ANOVA-selected features is trained on the public BRMH dataset
+      (945 subjects, seven diagnostic groups) and exported to JSON so that prediction runs entirely in the
+      browser. On a stratified 20% test split (189 subjects) it reaches 98.41% accuracy with a macro F1 of
+      0.98; per-class scores, limitations and the next evaluation steps are discussed.
+    </p>
+
+    <h2><span>1</span>Objective</h2>
+    <p>
+      To build an end-to-end, reproducible pipeline — from tabular EEG features to an interactive,
+      server-free prediction interface — that can be used to teach applied machine learning on health data
+      and to explore EEG-based screening research. The tool is not a diagnostic device.
+    </p>
+
+    <div class="cols">
+      <div>
+        <h2><span>2</span>Data</h2>
+        <p>
+          The data come from Park et al. [1], who collected resting-state EEG, IQ scores and medical records
+          of 945 subjects — 850 patients with major psychiatric disorders and 95 healthy controls. A public
+          copy (<code>EEG.machinelearing_data_BRMH.csv</code>) is available on Kaggle [2].
+        </p>
+        <ul>
+          <li><b>Columns (1,149):</b> identifiers (<code>no.</code>, <code>eeg.date</code>), demographics
+            (sex, age, education, IQ) and qEEG features — absolute band power (<code>AB.*</code>) and
+            inter-channel coherence (<code>COH.*</code>) across frequency bands.</li>
+          <li><b>Target:</b> <code>main.disorder</code> (seven groups). The finer
+            <code>specific.disorder</code> label is excluded.</li>
+        </ul>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>Diagnostic group</th><th class="n">n</th><th class="n">%</th></tr></thead>
+          <tbody>
+            <tr><td>Mood disorder</td><td class="n">266</td><td class="n">28.1</td></tr>
+            <tr><td>Addictive disorder</td><td class="n">186</td><td class="n">19.7</td></tr>
+            <tr><td>Trauma- and stress-related</td><td class="n">128</td><td class="n">13.5</td></tr>
+            <tr><td>Schizophrenia</td><td class="n">117</td><td class="n">12.4</td></tr>
+            <tr><td>Anxiety disorder</td><td class="n">107</td><td class="n">11.3</td></tr>
+            <tr><td>Healthy control</td><td class="n">95</td><td class="n">10.1</td></tr>
+            <tr><td>Obsessive-compulsive disorder</td><td class="n">46</td><td class="n">4.9</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="n">945</td><td class="n">100</td></tr></tfoot>
+        </table>
+        <p class="caption">Table 1. Class distribution of <code>main.disorder</code>. The largest group is
+          5.8× the smallest, so macro-averaged metrics are essential.</p>
+      </div>
+    </div>
+
+    <h2><span>3</span>Pipeline</h2>
+    <div class="flow">
+      <div>BRMH CSV</div><i>→</i><div>Drop IDs</div><i>→</i><div>Impute &amp; encode</div><i>→</i>
+      <div>Standardise</div><i>→</i><div>Stratified 80/20 split</div><i>→</i><div>ANOVA F, k = 10</div><i>→</i>
+      <div>Random Forest, 300 trees</div><i>→</i><div>Export JSON</div><i>→</i><div>Browser inference</div>
+    </div>
+    <p class="caption">Figure 1. Training and deployment pipeline as implemented in <code>scripts/export_model.py</code>.</p>
+    <ol>
+      <li><b>Cleaning.</b> Identifier columns and the secondary label are dropped, as are columns that are
+        entirely empty.</li>
+      <li><b>Imputation and encoding.</b> Numeric features: median imputation. Categorical features (e.g.
+        sex): most-frequent imputation followed by label encoding. Target labels are encoded to seven
+        integer classes.</li>
+      <li><b>Scaling.</b> All features are standardised to zero mean and unit variance (z-scores).</li>
+      <li><b>Split.</b> A stratified 80/20 split with a fixed seed (<code>random_state = 42</code>) gives
+        756 training and 189 test subjects with the class proportions of Table 1.</li>
+      <li><b>Feature selection.</b> <code>SelectKBest</code> with the ANOVA F-statistic keeps the ten most
+        discriminative features. It is fitted on the training split only, so test labels never inform
+        the selection.</li>
+      <li><b>Model.</b> A Random Forest [3] with 300 trees and <code>class_weight = "balanced"</code> (to
+        counter the imbalance in Table 1) is trained with scikit-learn [4]. Random Forests capture
+        non-linear interactions with little tuning and expose feature importances, which suits an
+        exploratory, teaching-oriented tool.</li>
+    </ol>
+
+    <h2 class="break"><span>4</span>Deployment: inference in the browser</h2>
+    <p>
+      The fitted pipeline is serialised to JSON: the scaler's means and scales, the indices of the selected
+      features and, for every tree, its split features, thresholds, child pointers and per-class leaf counts.
+      A TypeScript module (<code>src/model/inference.ts</code>) re-implements scikit-learn's
+      <code>predict_proba</code>: it applies the same preprocessing to an uploaded CSV, walks each tree,
+      normalises the leaf counts and averages them across trees. The React + Vite interface offers
+      Upload &amp; Predict, Model Performance, Model Insights (feature importance) and Dataset views. Because
+      no server is involved, uploaded data never leaves the user's device.
+    </p>
+
+    <h2><span>5</span>Results</h2>
+    <div class="cols">
+      <div>
+        <p>
+          On the held-out test split (189 subjects, <code>random_state = 42</code>) the model classifies
+          186 subjects correctly: <b>accuracy 98.41%</b>, <b>macro F1 0.98</b> and weighted F1 0.98. The
+          three errors are two anxiety-disorder subjects and one healthy control assigned to other
+          groups (Table 2). The results were presented and demonstrated during
+          the MCA final-year evaluation (viva).
+        </p>
+        <p>
+          For context, Park et al. [1] report <i>binary</i> patient-versus-control accuracies of about
+          74.5% (obsessive-compulsive disorder) to 93.8% (schizophrenia) with a different protocol, so the
+          figures are not directly comparable. Because they come from a single split, they should be
+          confirmed with cross-validation and, ideally, an external dataset (Section 6).
+        </p>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>Class</th><th class="n">Prec.</th><th class="n">Rec.</th><th class="n">F1</th><th class="n">n</th></tr></thead>
+          <tbody>
+            <tr><td>Addictive disorder</td><td class="n">1.00</td><td class="n">1.00</td><td class="n">1.00</td><td class="n">37</td></tr>
+            <tr><td>Anxiety disorder</td><td class="n">1.00</td><td class="n">0.91</td><td class="n">0.95</td><td class="n">22</td></tr>
+            <tr><td>Healthy control</td><td class="n">1.00</td><td class="n">0.95</td><td class="n">0.97</td><td class="n">19</td></tr>
+            <tr><td>Mood disorder</td><td class="n">0.98</td><td class="n">1.00</td><td class="n">0.99</td><td class="n">53</td></tr>
+            <tr><td>Obsessive-compulsive</td><td class="n">1.00</td><td class="n">1.00</td><td class="n">1.00</td><td class="n">9</td></tr>
+            <tr><td>Schizophrenia</td><td class="n">0.96</td><td class="n">1.00</td><td class="n">0.98</td><td class="n">23</td></tr>
+            <tr><td>Trauma- and stress-related</td><td class="n">0.96</td><td class="n">1.00</td><td class="n">0.98</td><td class="n">26</td></tr>
+          </tbody>
+          <tfoot><tr><td>Macro avg · accuracy 98.41%</td><td class="n">0.99</td><td class="n">0.98</td><td class="n">0.98</td><td class="n">189</td></tr></tfoot>
+        </table>
+        <p class="caption">Table 2. Per-class precision, recall and F1 on the stratified test split.</p>
+      </div>
+    </div>
+
+    <h2><span>6</span>Limitations and planned improvements</h2>
+    <ul>
+      <li><b>Preprocessing leakage.</b> The imputer and scaler are fitted on all 945 rows before the split.
+        Wrapping every step in a scikit-learn <code>Pipeline</code> fitted on training folds only removes
+        this mild leakage.</li>
+      <li><b>Single split.</b> One 80/20 split gives a high-variance estimate, and the OCD class has only
+        nine test subjects. Next step: stratified 5-fold cross-validation (mean ± SD of macro-F1 and
+        balanced accuracy) with nested tuning of <i>k</i>, plus baselines (majority class, logistic
+        regression).</li>
+      <li><b>Imbalance.</b> Obsessive-compulsive disorder has only 46 subjects; macro metrics and, if
+        needed, resampling should accompany class weighting.</li>
+      <li><b>Generalisation.</b> All data come from one dataset; performance on other EEG systems,
+        clinics and populations is unknown.</li>
+      <li><b>Ethics.</b> Outputs are not diagnoses. The tool is intended for research and teaching only and
+        must not inform clinical decisions.</li>
+    </ul>
+
+    <h2><span>7</span>Reproducibility</h2>
+    <p>
+      Code: github.com/its-aditisingh/Mind-Scan-Analyzer (MIT licence). Training:
+      <code>python scripts/export_model.py EEG.machinelearing_data_BRMH.csv</code>, which writes
+      <code>src/model/model.json</code>; <code>npm install &amp;&amp; npm run dev</code> starts the interface.
+    </p>
+
+    <h2><span>8</span>References</h2>
+    <ol class="refs">
+      <li>Park, S. M., et al. (2021). Identification of major psychiatric disorders from resting-state
+        electroencephalography using a machine learning approach. <i>Frontiers in Psychiatry</i>, 12, 707581.
+        https://doi.org/10.3389/fpsyt.2021.707581</li>
+      <li>EEG Psychiatric Disorders Dataset (public copy of the data in [1]). Kaggle.
+        https://www.kaggle.com/datasets/shashwatwork/eeg-psychiatric-disorders-dataset</li>
+      <li>Breiman, L. (2001). Random forests. <i>Machine Learning</i>, 45(1), 5–32.</li>
+      <li>Pedregosa, F., et al. (2011). Scikit-learn: Machine learning in Python. <i>Journal of Machine
+        Learning Research</i>, 12, 2825–2830.</li>
+    </ol>
+
+    <footer>
+      Aditi Singh · Methodology note on the MCA final-year project “Mind Scan Analyzer” · October 2026 ·
+      its-aditisingh-portfolio.vercel.app/research
+    </footer>
+  </body>
+</html>
