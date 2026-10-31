@@ -19,12 +19,13 @@ Source: resume + GOER certificate + other certificates. → `src/data/achievemen
 | Skills | Leadership, Teamwork, Risk Analysis, Decision-Making |
 | Proof | `GOER 2025 certificate.pdf` (cleaner copy). Signed by Ishita Shah, Director – Marketing, IRM India Affiliate. |
 | Event | Third Edition of National GOER — stage banner tagline: *"Where Champions Rise – And Risk Is Rewarded"* |
-| Photos | 4 event photos (see below) — shown as a gallery with lightbox; first one is the card/hero cover |
+| Photos | 5 event photos (see below) — shown as a gallery with lightbox; first one is the card/hero cover |
 
 ### GOER photos (from `Certificate/WhatsApp Image 2026-10-29 at …`)
 | Output file | Source | Orientation | Caption | Alt |
 |---|---|---|---|---|
 | `goer-2025-stage.webp` (**cover**) | `12.25.21 AM.jpeg` | landscape 1600×1200 | Finalist teams on stage at National GOER — Third Edition | Group of students and faculty standing on stage in front of the National GOER Third Edition banner |
+| `goer-2025-finalists.webp` | `IMG_5284.HEIC` (iPhone, 5 Jul 2025; converted to `assets-src/achievements/goer-2025-finalists.jpg`, ceiling cropped) | landscape 4:3 | Finalists at the IRM India venue — 5 July 2025 | Large group of student finalists in formal clothes, standing and kneeling in front of an IRM India backdrop |
 | `goer-2025-strategy-1.webp` | `12.25.19 AM.jpeg` | landscape | Working through risk scenarios during the finals | Two team members discussing strategy over a laptop |
 | `goer-2025-strategy-2.webp` | `12.25.20 AM.jpeg` | landscape | Team discussion during the competition round | Two team members looking at a laptop during the competition |
 | `goer-2025-venue.webp` | `12.25.20 AM (1).jpeg` | portrait | Participants outside the venue | Group of participants in formal clothes outside a large building |

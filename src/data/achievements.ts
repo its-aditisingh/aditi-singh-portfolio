@@ -38,6 +38,11 @@ export const achievements: Achievement[] = [
         'Finalist teams on stage at National GOER — Third Edition',
       ),
       captioned(
+        'achievements/goer-2025-finalists',
+        'Large group of student finalists in formal clothes, standing and kneeling in front of an IRM India backdrop',
+        'Finalists at the IRM India venue — 5 July 2025',
+      ),
+      captioned(
         'achievements/goer-2025-strategy-1',
         'Two team members discussing strategy over a laptop',
         'Working through risk scenarios during the finals',

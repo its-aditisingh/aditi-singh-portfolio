@@ -124,9 +124,9 @@ describe('counts', () => {
     expect(certificates.filter((c) => c.featured)).toHaveLength(5);
   });
 
-  it('has 4 GOER event photos', () => {
+  it('has 5 GOER event photos', () => {
     const goer = achievements.find((a) => a.slug === 'goer-2025-national-finalist');
-    expect(goer?.photos).toHaveLength(4);
+    expect(goer?.photos).toHaveLength(5);
   });
 });
 

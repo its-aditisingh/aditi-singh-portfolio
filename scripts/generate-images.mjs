@@ -76,6 +76,15 @@ const jobs = [
   photo('goer-2025-strategy-1', 'WhatsApp Image 2026-10-29 at 12.25.19 AM.jpeg'),
   photo('goer-2025-strategy-2', 'WhatsApp Image 2026-10-29 at 12.25.20 AM.jpeg'),
   photo('goer-2025-venue', 'WhatsApp Image 2026-10-29 at 12.25.20 AM (1).jpeg'),
+  // Certificate/IMG_5284.HEIC (iPhone, 5 Jul 2025) — sharp can't decode HEIC, so it was converted once
+  // to JPEG with pillow-heif; 3024×4032 portrait → crop the ceiling, keep the group and IRM backdrop
+  {
+    key: 'achievements/goer-2025-finalists',
+    src: `${SRC}/achievements/goer-2025-finalists.jpg`,
+    extract: { left: 0, top: 1500, width: 3024, height: 2268 },
+    widths: W.photo,
+    quality: 78,
+  },
 
   // ---- Anchoring / speaking photos (docs/05-content/achievements.md)
   photo('anchor-mca-tcs-stage', 'mca-anchor3.jpeg'),

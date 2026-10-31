@@ -181,13 +181,13 @@ describe('Achievements (docs/03-features/05-achievements.md)', () => {
     const dialog = await screen.findByRole('dialog', { name: /National GOER 2025/ });
 
     const photos = within(dialog).getAllByRole('button', { name: /^View larger: / });
-    expect(photos.length).toBeGreaterThanOrEqual(5); // certificate proof + 4 photos
+    expect(photos.length).toBeGreaterThanOrEqual(6); // certificate proof + 5 photos
     fireEvent.click(photos[1] as HTMLElement);
 
     const viewer = await screen.findByRole('dialog', { name: 'Image viewer' });
-    expect(within(viewer).getByText('1 / 4')).toBeInTheDocument();
+    expect(within(viewer).getByText('1 / 5')).toBeInTheDocument();
     fireEvent.keyDown(document, { key: 'ArrowRight' });
-    expect(within(viewer).getByText('2 / 4')).toBeInTheDocument();
+    expect(within(viewer).getByText('2 / 5')).toBeInTheDocument();
 
     esc();
     await waitFor(() =>
